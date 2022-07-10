@@ -1,0 +1,88 @@
+<!-- หน้าแรกแสดงรายชื่อคณะกรรมการทั้งหมด -->
+{% extends 'Menubar-Template.html' %} 
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/card.css' %}?{% now "U" %}" />
+<p>รายชื่อคณะกรรมการ<p><br>
+
+
+  <script>
+    function call(id){
+  
+      Swal.fire({
+        "title":"ลบบัญชีนี้ใช่หรือไม่ ?    ",
+        "text":"กรุณาตรวจสอบบัญชี",
+        "icon":"question",
+        "showCancelButton":true,
+        "cancelButtonText":"ย้อนกลับ",
+        "confirmButtonText":"ลบ"
+      })
+      .then(function (result){
+        if (result.isConfirmed){
+          window.location.href="delmanageCommitteeHome"+"/"+id
+        }
+      })
+  
+    }
+
+    </script>
+
+    
+
+{% for scholar in scholars %}
+
+    <article class="message is-success"><a href="/viewManageCommitteeHome/{{scholar.id}}">
+
+      <div class="list">
+        <div class="list-item box">
+          <div class="list-item-image">
+            <figure class="image is-64x64">
+              <img class="is-rounded" src="{{scholar.socialaccount_set.all.0.get_avatar_url}}">
+            </figure>
+          </div>
+          <div class="list-item-content">
+            <div class="list-item-title">ชื่อ: {{scholar.first_name}} {{scholar.last_name}}</div>
+            <div class="list-item-description">email: {{scholar.email}}</div>
+            <div class="level-right">
+            <a href="#" onclick ="call({{scholar.id}})"><button class="button is-danger"><p> <i class="fas fa-trash"> </i> ลบบัญชีนี้ </p></button></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </article>  
+  
+{% endfor %}
+
+<a href="/addCommittee"> <button class="button is-success is-rounded">เพิ่มรายชื่อกรรมการ</button></a>
+
+
+<!--page-->
+
+<div class="level-item has-text-centered">
+  <nav class="pagination" role="navigation" aria-label="pagination">
+    <ul class="pagination-list">
+      {%if scholars.paginator.num_pages > 1 %}
+      {% for pagenumber in scholars.paginator.page_range %}
+      <li>
+        <a class="pagination-link 
+        
+        
+        {% if scholars.number == pagenumber %}
+        is-current 
+  
+        {% endif %}
+  
+  
+        " aria-label="Goto page 1" href="?page={{pagenumber}}">{{pagenumber}}</a>
+      </li>
+      {% endfor %}
+      {%endif%}
+   
+    </ul>
+  </nav>
+  </div>
+  <!-- end page -->
+
+
+{% endblock %}

@@ -1,0 +1,222 @@
+{% load static %}
+{% load socialaccount %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home</title>
+  <!-- <link rel="stylesheet" href="{% static 'css/Menubar-Template.css' %}?{% now "U" %}" /> -->
+  <link rel="stylesheet" href="{% static 'css/Form-Template.css' %}?{% now " U" %}" />
+  <script src="https://kit.fontawesome.com/b3383d3f2a.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma/bulma.css" rel="stylesheet">
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+  {% block js %}
+  <script>
+    tinymce.init({
+      selector: '#mytextarea',
+      plugins: ['table','print'],
+      table_use_colgroups: true
+    });
+  </script>
+
+
+  {%if messages %}
+  {%for m in messages %}
+
+  
+  {% if m.tags == "error" %}
+  <script>
+    console.log("HELLOWORLD")
+    Swal.fire({
+      "title": "ไม่สำเร็จ",
+      "text": "{{m}} ",
+      "icon": "error"
+    })
+  </script>
+  
+  
+  
+  
+  {% else %}
+       
+
+
+  <script>
+    Swal.fire({
+      "title": "สำเร็จ",
+      "text": "{{m}}",
+      "icon": "success"
+    })
+  </script>
+  {% endif %}
+
+
+  {% endfor %}
+  {% endif %}
+
+  {% endblock %}
+  <!--เริ่มการคลุม-->
+  <div class="wrapper">
+    <!--เริ่มส่วนของ Header-->
+    <div class="header">
+      <div class="header-menu">
+        <div class="title"></i><span style=></span></div>
+        <div class="sidebar-btn">
+
+        </div>
+
+        <ul>
+          <li></li>
+        </ul>
+      </div>
+    </div>
+    <!--จบส่วนของ Header-->
+    <!--เมนูด้านข้างเริ่มที่นี่-->
+    <div class="sidebar">
+      <div class="sidebar-menu">
+        <div class="sidebar-btn">
+          <li class="item">
+            <div class="menu-btn">
+              <i class="fas fa-bars"></i><span>ปิดหน้าต่างเมนู</span>
+            </div>
+          </li>
+        </div>
+        <center class="profile">
+          {% if user.is_superuser %}
+          <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="" />
+          {% elif user.is_staff %}
+          <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="" />
+          {%else%}
+          <img src="{{ request.user.avatar_profile.sp_path_to_avatar.url }}" alt="" />
+          {%endif%}
+          <p>{{ user.first_name }} {{ user.last_name }}</p>
+          {% if user.is_superuser %}
+          <p>ผู้ดูแลระบบ</p>
+
+          {%elif user.is_staff %}
+          <p>คณะกรรมการ</p>
+          {%else%}
+          <p>นิสิต
+          <p>
+         
+
+          {%endif%}
+        </center>
+
+
+
+        <!--แอดมิ้น-->
+        {%if user.is_superuser %}
+        <li class="item">
+          <a href="/home" class="menu-btn">
+            <i class="fas fa-desktop"></i><span>ประกาศรับทุน</span>
+          </a>
+        </li>
+        <li class="item">
+          <a href="/InformationHome" class="menu-btn">
+            <i class="fa-solid fa-newspaper"></i><span>ข่าวสารประชาสัมพันธ์</span>
+          </a>
+        </li>
+        <li class="item">
+          <a href="/firstAppilcationAdmin" class="menu-btn">
+            <i class="far fa-address-book"></i><span>รายชื่อนิสิตขอแต่ละทุน</span>
+          </a>
+        </li>
+        <li class="item" id="settings">
+          <a href="#settings" class="menu-btn">
+            <i class="fa-solid fa-calendar-plus"></i><span>สร้าง <i class="fas fa-chevron-down drop-down"></i></span>
+          </a>
+          <div class="sub-menu">
+            <a href="/CreateScholar"><i class="fas fa-desktop"></i><span>สร้างประกาศทุน</span></a>
+            <a href="/information"><i class="fa-solid fa-newspaper"></i><span>สร้างประชาสัมพันธ์</span></a>
+            <a href="/scholarScore"><i class="fa-solid fa-list"></i><span>สร้างแบบฟอร์มการให้คะแนน</span></a>
+          </div>
+        </li>
+        <li class="item">
+          <a href="/historyGetScholar" class="menu-btn">
+            <i class="fa-solid fa-book"></i><span>ประวัติการรับทุน</span>
+          </a>
+        </li>
+        <li class="item">
+          <a href="/manageCommitteeHome" class="menu-btn">
+            <i class="fa-solid fa-people-group"></i><span>จัดการรายชื่อกรรมการ</span>
+          </a>
+        </li>
+        <!--กรรมกั้น-->
+        {%elif user.is_staff%}
+        <li class="item">
+          <a href="/interview" class="menu-btn">
+            <i class="fa-solid fa-clipboard-question"></i><span>สัมภาษณ์ทุน</span>
+          </a>
+        </li>
+        <!--นิซิต-->
+        {%else%}
+
+        <li class="item">
+          <a href="/home" class="menu-btn">
+            <i class="fa-solid fa-chalkboard"></i><span>ประกาศรับทุน</span>
+          </a>
+        </li>
+        <li class="item">
+          <a href="/statusNisit" class="menu-btn">
+            <i class="fa-solid fa-book"></i><span>ประวัติการยื่นทุน</span>
+          </a>
+        </li>
+
+        <li class="item">
+          <a href="/editHistoryNisit" class="menu-btn">
+            <i class="fa-solid fa-gears"></i><span>แก้ไขข้อมูลส่วนตัว</span>
+          </a>
+        </li>
+        {%endif%}
+
+        <li class="item">
+          <a href="{% url 'logout' %}" class="menu-btn">
+            <i class="fas fa-power-off"></i><span>ออกจากระบบ</span>
+          </a>
+        </li>
+
+
+
+      </div>
+    </div>
+    <!--จบส่วนเมนูข้าง-->
+    <!--เนื้อหาด้านใน-->
+    <div class="main-container">
+      <div class="card">
+        <div class="contact-box">
+          {% block content %}
+
+          {% endblock %}
+
+        </div>
+        <!--จบเนื้อหาส่วนใน-->
+      </div>
+    </div>
+
+  </div>
+  <!--จบทั้งหมด-->
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $(".sidebar-btn").click(function () {
+        $(".wrapper").toggleClass("collapse");
+      });
+    });
+
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      $(".wrapper").toggleClass("collapse", true);
+    } else {
+
+      $(".wrapper").toggleClass("collapse", false);
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+{% extends 'Menubar-Template.html' %} 
+{% block content %}
+{% for infoo in info %}
+
+<h1 class="title is-4" >{{infoo.si_name}}</h1>
+{% endfor %}
+
+<form method="post" action="/scholarWeightScore">			
+  <div class="form-group fieldGroup">
+    <div class="input-group">
+      <input type="text" name="name[]" class="form-control" placeholder="หัวข้อ"/>
+      <input type="text" name="email[]" class="form-control" placeholder="น้ำหนักคะแนน"/>
+      <div class="input-group-addon"> 
+        <a href="javascript:void(0)" class="button is-primary addMore"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Add</a>
+      </div>
+    </div>
+  </div>
+  <input type="submit" name="submit" class="button is-primary" value="submit"/>		
+</form>
+
+<!-- copy of input fields group -->
+
+<div class="form-group fieldGroupCopy" style="display: none;">
+  <div class="input-group">
+    <input type="text" name="name[]" class="form-control" placeholder="หัวข้อ"/>
+    <input type="text" name="email[]" class="form-control" placeholder="น้ำหนักคะแนน"/>
+    <div class="input-group-addon"> 
+      <a href="javascript:void(0)" class="button is-danger remove"><span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span> Remove</a>
+    </div>
+  </div>
+</div>
+<script>
+
+  $(document).ready(function(){
+    //group add limit
+    var maxGroup = 10;
+    
+    //add more fields group
+    $(".addMore").click(function(){
+      if($('body').find('.fieldGroup').length < maxGroup){
+        var fieldHTML = '<div class="form-group fieldGroup">'+$(".fieldGroupCopy").html()+'</div>';
+        $('body').find('.fieldGroup:last').after(fieldHTML);
+      }else{
+        alert('Maximum '+maxGroup+' groups are allowed.');
+      }
+    });
+    
+    //remove fields group
+    $("body").on("click",".remove",function(){ 
+      $(this).parents(".fieldGroup").remove();
+    });
+  });
+</script>
+
+{% endblock %}

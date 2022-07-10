@@ -1,0 +1,31 @@
+@charset "UTF-8";
+.avatar-wrapper {
+  position: relative;
+  height: 200px;
+  width: 200px;
+  margin: 50px auto;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 1px 1px 15px -5px black;
+  transition: all 0.3s ease;
+}
+.avatar-wrapper:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+.avatar-wrapper:hover .profile-pic {
+  opacity: 0.5;
+}
+.avatar-wrapper .profile-pic {
+  height: 100%;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.avatar-wrapper .upload-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}

@@ -1,0 +1,109 @@
+.wrapper.collapse .main-container {
+  width: calc(100% - 70px);
+  margin-left: 70px;
+}
+
+.wrapper .main-container .card {
+  padding: 15px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  width: 100%;
+  height: auto;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  justify-content: center;
+}
+
+.row {
+  margin-bottom: 50px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+  justify-content: center;
+}
+
+.table {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 30px;
+}
+
+.w3-container {
+  text-align: center;
+}
+
+.button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 120%;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 800px) {
+  .wrapper.collapse .main-container {
+    width: calc(100% - 70px);
+    margin-left: 70px;
+  }
+  
+  .wrapper .main-container .card {
+    padding: 15px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    width: 100%;
+    height: auto;
+  }
+  
+  .column {
+    float: left;
+    width: 50%;
+    justify-content: center;
+  }
+  
+  .row {
+    margin-bottom: 50px;
+  }
+  
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+    justify-content: center;
+  }
+  
+  .table {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 10px;
+  }
+  
+  .w3-container {
+    text-align: center;
+  }
+  
+  .button {
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 90%;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,166 @@
+{% extends 'Menubar-Template.html' %} 
+{% load static %}
+{% block content %}
+
+<script type="text/javascript">
+function call31(info_id,userid,title,name,sirname)
+  {
+    Swal.fire({
+      "title": "ท่านจะสละสิทธิ์หรือไม่ ? ",
+      "icon":"question",
+      "showCancelButton":true,
+      "cancelButtonText":"ย้อนกลับ",
+      "confirmButtonText":"ใช่"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        document.getElementById("com").submit()
+
+        
+        
+        
+        
+
+
+
+
+
+
+
+      }
+    })
+  }
+</script>
+
+{% for state,data in states.items %}
+
+        <div class="cardforStatus">
+          <div class = "progessConatainer">
+            <div class="progressionInfomantHeader">
+               {{state.sa_si_id.si_name}} 
+            </div>
+             <div class="progressionInfomantDate">
+               {{state.sa_si_id.si_create_time}} 
+            </div>
+              <div class="progressionInfomantStatus">
+              
+              {% if state.sa_status == 21 %}
+              {%if data.0.fm_file%}
+              ผ่านการคัดเลือก
+              
+                <a href = "{{data.0.fm_file.url}}"><button class="button is-danger"><p> ดาวน์โหลดเอกสาร </p></button></a>
+              {%else%}
+              ผ่านการคัดเลือก รอเจ้าหน้าที่แจ้งเอกสารสอบสัมภาษณ์
+              {% endif %}
+
+              {% elif state.sa_status == 31 %}
+              กรุณายืนยันรับสิทธิ์ได้ไม่เกิน {{state.sa_statusExDate}}<br>
+              <form action ="/statusNisit" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="ยืนยันรับทุน" class="button is-success">
+                <input type="hidden" id="custId" name="custId" value="1">
+                <input type="hidden" id="infoId" name="infoId" value="{{state.sa_si_id.id}}">
+              </form>
+
+              <form  method="POST" id="com" name="com">
+                {% csrf_token %}
+                <input onclick="call31()" value="สละสิทธิ์รับทุน" class="button is-danger">
+                <input type="hidden" id="custId" name="custId" value="0">
+                <input type="hidden" id="infoId" name="infoId" value="{{state.sa_si_id.id}}">
+              </form>
+
+              {% elif state.sa_status == 33 or state.sa_status == 34 %}
+              {% if data.1 %}
+              <p>แก้ไขข้อมูลบัญชีได้ไม่เกิน </p> {{state.sa_statusExDate}}<br>
+              <a href="/payment/{{state.sa_si_id.id}}"><input type="submit" value="แก้ไขบัญชีธนาคาร" class="button is-warning"></a>
+              {% endif %}
+
+              {% endif %}
+            </div>
+            
+            <div class="progessBar">
+              
+          {% if state.sa_status == 11 %}
+              <li class="active" >ยื่นเอกสารให้เจ้าหน้าที่</li>
+              <li class="inprogess" >เจ้าหน้าที่ตรวจสอบเอกสาร</li>
+              <li class="inprogess" >ผ่านการคัดเลือกสอบสัมภาษณ์</li>
+              <li class="inprogess" >รับเงินทุนสนับสนุนการศึกษา</li>
+          {% elif state.sa_status == 20 %}
+              <li class="active" >ยื่นเอกสารให้เจ้าหน้าที่</li>
+              <li class="inactive" >เจ้าหน้าที่ตรวจสอบเอกสาร</li>
+              <li class="inactive" >ผ่านการคัดเลือกสอบสัมภาษณ์</li>
+              <li class="inactive" >รับเงินทุนสนับสนุนการศึกษา</li>
+          {% elif state.sa_status == 21 %}
+              <li class="active" >ยื่นเอกสารให้เจ้าหน้าที่</li>
+              <li class="active" >เจ้าหน้าที่ตรวจสอบเอกสาร</li>
+              <li class="inprogess" >ผ่านการคัดเลือกสอบสัมภาษณ์</li>
+              <li class="inprogess" >รับเงินทุนสนับสนุนการศึกษา</li>
+          {% elif state.sa_status == 30 %}
+              <li class="active" >ยื่นเอกสารให้เจ้าหน้าที่</li>
+              <li class="active" >เจ้าหน้าที่ตรวจสอบเอกสาร</li>
+              <li class="inactive" >ผ่านการคัดเลือกสอบสัมภาษณ์</li>
+              <li class="inactive" >รับเงินทุนสนับสนุนการศึกษา</li>
+          {% elif state.sa_status == 31 %}
+              <li class="active" >ยื่นเอกสารให้เจ้าหน้าที่</li>
+              <li class="active" >เจ้าหน้าที่ตรวจสอบเอกสาร</li>
+              <li class="active" >ผ่านการคัดเลือกสอบสัมภาษณ์</li>
+              <li class="inprogess" >รับเงินทุนสนับสนุนการศึกษา</li>
+          {% elif state.sa_status == 32 %}
+              <li class="active" >ยื่นเอกสารให้เจ้าหน้าที่</li>
+              <li class="active" >เจ้าหน้าที่ตรวจสอบเอกสาร</li>
+              <li class="inactive" >สละสิทธิ์รับทุน</li>
+              <li class="inactive" >รับเงินทุนสนับสนุนการศึกษา</li>
+          {% elif state.sa_status == 33 or state.sa_status == 34 %}
+              <li class="active" >ยื่นเอกสารให้เจ้าหน้าที่</li>
+              <li class="active" >เจ้าหน้าที่ตรวจสอบเอกสาร</li>
+              <li class="active" >ยืนยันรับทุน</li>
+              <li class="inprogess" >รับเงินทุนสนับสนุนการศึกษา</li>
+          {% elif state.sa_status == 41 %}
+              <li class="active" >ยื่นเอกสารให้เจ้าหน้าที่</li>
+              <li class="active" >เจ้าหน้าที่ตรวจสอบเอกสาร</li>
+              <li class="active" >ผ่านการคัดเลือกสอบสัมภาษณ์</li>
+              <li class="active" >รับเงินทุนสนับสนุนการศึกษา</li>
+          {% endif %}
+            </div>
+          </div>
+        </div>
+{% endfor %}
+      <!--จบเนื้อหาส่วนใน-->
+
+    <!--<script type="text/javascript">
+      $(document).ready(function () {
+        $(".sidebar-btn").click(function () {
+          $(".wrapper").toggleClass("collapse");
+        });
+      });
+        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+   $(".wrapper").toggleClass("collapse ", true);
+}else{
+   
+     $(".wrapper").toggleClass("collapse", false);
+}
+    </script>-->
+
+
+
+    <script>
+      $(document).ready(
+        $('#post-form').submit(function(e){
+          e.preventDefault();
+          var serializedData = $(this).serialize();
+      
+          $.ajax({
+            type:"POST",
+            url: "/statusNisit",
+            data:  serializedData,
+            processData:false,
+            mimeType: 'multipart/form-data',
+            success: function(data){
+              next()
+              console.log("HELLOWORLD")
+            }
+          });
+        })
+      );
+      </script>
+
+{% endblock %}

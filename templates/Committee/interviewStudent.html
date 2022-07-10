@@ -1,0 +1,39 @@
+{% extends 'Menubar-Template.html' %} 
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/style-commit.css' %}?{% now " U" %}" />
+{%if status %}
+<table class="table">
+    <thead>
+      <tr>
+        <th>ชื่อ - สกุล</th>
+        
+        
+        <th>สถานะการสอบสัมภาษณ์</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+
+    {% for key,value in dic.items %}
+        {%if value == True and key.4 == 21%}
+        <tr>
+            <th>{{key.0}}  {{key.1}}</th>
+            <td>คุณได้ให้คะแนนไปแล้ว</td>
+        </tr>
+        {%elif value == False and key.4 == 21 %}
+        <tr>
+        <th>{{key.0}} {{key.1}}</th> 
+        <td><a href="/interviewStudentTest/{{key.3}}/{{key.2}}"><button class="button is-primary"><p>สอบสัมภาษณ์<p></button></a></td>
+        </tr>
+        {%endif%}
+        <br/>
+    {%endfor%}
+{%else%}
+<h2 class="title is-2">ยังไม่มีรายชื่อนิสิตในขณะนี้ กรุณาติดต่อใหม่อีกครั้งภายหลังค่ะ</h2>
+{%endif%}
+
+</tbody>
+</table>
+
+{% endblock %}

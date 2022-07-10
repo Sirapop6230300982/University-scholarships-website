@@ -1,0 +1,112 @@
+@import url("https://fonts.googleapis.com/css2?family=Prompt:wght@200&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+  font-family: "Prompt", sans-serif;
+}
+
+body {
+  background: #fff;
+}
+
+a:link { text-decoration: none; }
+.wrapper .main-container {
+  width: 100%;
+  height:auto;
+  padding: 15px;
+  background: url(background.jpg) no-repeat;
+  background-size: cover;
+  
+  transition: 0.3s;
+}
+
+
+
+.wrapper .main-container .card {
+  background: rgba(220, 220, 220, 0.686);
+  padding: 30px 20px;
+  font-size: 14px;
+  width: 50%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.wrapper .main-container .card .imageHolder
+{
+    margin-left: auto;
+    margin-right: auto;   
+    width: 70%;
+    display: block;
+    height:auto;
+     
+    
+}
+
+.wrapper .main-container .card .imageHolder img{
+     object-fit: cover;
+     display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height:auto;
+  padding:10px 10px ;
+}
+
+
+
+
+.wrapper .main-container .card .description {
+  padding: 10px;
+  border: 1px solid;
+  width:70%;
+  height:auto;
+  color: rgb(0, 0, 0);
+  height: auto;
+  margin-left: auto;
+  margin-right: auto; 
+  font-size: 20px;  
+}
+
+.wrapper .main-container .card button{
+  font-size: 25px;
+  width:100%;
+  margin-left: auto;
+    margin-right: auto;
+    height:50%;
+}
+
+@media screen and (max-width: 1000px) {
+
+  .wrapper .main-container .card {
+  background: rgba(220, 220, 220, 0.686);
+  padding: 30px 20px;
+  font-size: 14px;
+  width: 100%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+  .wrapper .main-container .card .description {
+  padding: 10px;
+  border: 1px solid;
+  width:70%;
+  height:auto;
+  color: rgb(0, 0, 0);
+  height: auto;
+  margin-left: auto;
+  margin-right: auto; 
+  font-size: 15px;  
+}
+.wrapper .main-container .card button{
+  font-size: 15px;
+  width:100%;
+  height:50%;
+  margin-left: auto;
+    margin-right: auto;
+}
+a:link { text-decoration: none; }
+}

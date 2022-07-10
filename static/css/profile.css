@@ -1,0 +1,100 @@
+#Profile {
+    margin: 6rem auto 0;
+    background: white;
+    max-width: 80%;
+  }
+  
+  #user {
+    padding: 2.5rem;
+  }
+  
+  #img {
+    width: 120px;
+    height: 120px;
+    background: #DA609B url("https://s3.amazonaws.com/uifaces/faces/twitter/pixeliris/128.jpg") top center no-repeat;
+    display: block;
+    margin: 4rem auto 0;
+    border-radius: 50%;
+  }
+  
+  #social a {
+    margin: 0 0.5rem;
+  }
+  
+  i[class*="2x"] {
+    color: #DA609B;
+  }
+  
+  i[class*="1x"] {
+    transition: color 0.5s ease;
+    color: white;
+  }
+  i[class*="1x"]:hover {
+    color: #F1E0CD;
+  }
+  
+  #navigation ul {
+    background: #DA609B;
+  }
+  #navigation ul i {
+    color: #F1E0CD;
+  }
+  #navigation ul li.active i {
+    color: #DA609B;
+  }
+  #navigation ul li.active:hover i {
+    color: white;
+  }
+  
+  .nav-tabs {
+    border: none;
+  }
+  
+  .tab-pane {
+    padding: 10% 10% 2%;
+  }
+  
+  .nav-tabs.nav-justified > li > a {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+  }
+  .nav-tabs.nav-justified > li > a:hover {
+    background: #D88BAC;
+  }
+  
+  .progress-bar {
+    background-color: #DA609B;
+  }
+  
+  label, input {
+    margin-bottom: 1.25rem;
+  }
+  
+  label {
+    font-size: 1.75rem;
+    color: #DA609B;
+  }
+  label small {
+    color: #D88BAC;
+    font-size: 1.25rem;
+    margin-left: 0.25rem;
+  }
+  
+  .form-control:focus {
+    border-color: #D88BAC;
+    box-shadow: 0 0 0.5rem #D88BAC;
+  }
+  
+  button[type=submit] {
+    margin-top: 2rem;
+    background: #DA609B;
+    border-color: #DA609B;
+    color: white;
+    transition: color 0.5s ease;
+  }
+  button[type=submit]:hover {
+    background: #DA609B;
+    border-color: #DA609B;
+    color: #F1E0CD;
+  }

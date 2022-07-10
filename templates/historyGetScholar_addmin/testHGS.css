@@ -1,0 +1,725 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background: #fff;
+  }
+  
+  .wrapper .header {
+    z-index: 1;
+    background: #6b0d1d;
+    position: fixed;
+    width: calc(100% - 0%);
+    height: 50px;
+    display: flex;
+    top: 0;
+  }
+  
+  .wrapper .header .header-menu {
+    width: calc(100% - 0%);
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+  }
+  
+  .wrapper .header li {
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+  }
+  
+  .wrapper .header .header-menu .title {
+    color: #fff;
+    font-size: 25px;
+    text-transform: uppercase;
+    font-weight: 900;
+  }
+  
+  .wrapper .header .header-menu .title img {
+    width: 5%;
+  }
+  
+  .wrapper .header .header-menu .title span {
+    color: #37ab00;
+    padding: 20px;
+  }
+  
+  .wrapper .header .header-menu .sidebar-btn {
+    color: #fff;
+    position: absolute;
+    margin-left: 240px;
+    font-size: 22px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: 0.3s;
+    transition-property: color;
+  }
+  
+  .wrapper .header .header-menu .sidebar-btn:hover {
+    color: #cd0000;
+  }
+  
+  .wrapper .header .header-menu ul {
+    display: flex;
+  }
+  
+  .wrapper .header .header-menu ul li a {
+    background: #fff;
+    color: #000;
+    display: block;
+    margin: 0 10px;
+    font-size: 18px;
+    width: 34px;
+    height: 34px;
+    line-height: 35px;
+    text-align: center;
+    border-radius: 50%;
+    transition: 0.3s;
+    transition-property: background, color;
+  }
+  
+  .wrapper .header .header-menu ul li a:hover {
+    background: #cd0000;
+    color: #fff;
+  }
+  
+  .wrapper .sidebar {
+    z-index: 1;
+    background: #852b3a;
+    position: fixed;
+    top: 50px;
+    width: 250px;
+    height: 100%;
+    transition: 0.3s;
+    transition-property: width;
+    overflow-y: auto;
+  }
+  
+  .wrapper .sidebar .sidebar-menu {
+    overflow: hidden;
+    padding-bottom: 75px;
+    cursor: pointer;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .profile img {
+    margin: 20px 0;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .profile p {
+    color: #bbb;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .profile h2 {
+    color: yellow;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item {
+    width: 250px;
+    overflow: hidden;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item .menu-btn {
+    display: block;
+    color: #fff;
+    position: relative;
+    padding: 20px 20px;
+    transition: 0.3s;
+    transition-property: color;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item .menu-btn:hover {
+    background-color: #cd0000;
+    transition: 0.3s;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item .menu-btn i {
+    margin-right: 20px;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item .menu-btn .drop-down {
+    float: right;
+    font-size: 12px;
+    margin-top: 3px;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item .sub-menu {
+    background: #5c1818b6;
+    overflow: hidden;
+    max-height: 0;
+    transition: 0.3s;
+    transition-property: background, max-height;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item .sub-menu a {
+    display: block;
+    position: relative;
+    color: #fff;
+    white-space: nowrap;
+    font-size: 15px;
+    padding: 15px;
+    transition: 0.3s;
+    transition-property: background;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item .sub-menu a:hover {
+    background: #cd0000;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item .sub-menu a:not(last-child) {
+    border-bottom: 5px solid #000000cb;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item .sub-menu i {
+    padding-right: 20px;
+    font-size: 10px;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item:target .sub-menu {
+    max-height: 500px;
+  }
+  
+  .wrapper .main-container {
+    width: (100% - 250px);
+    margin-top: 70px;
+    margin-left: 250px;
+    padding: 15px;
+    
+    background-size: cover;
+    height: 100vh;
+    transition: 0.3s;
+  }
+  
+  .wrapper .main-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .wrapper.collapse .sidebar {
+    width: 70px;
+  }
+  
+  .wrapper.collapse .sidebar .profile img,
+  .wrapper.collapse .sidebar .profile p,
+  .wrapper.collapse .sidebar .profile h2,
+  .wrapper.collapse .sidebar span,
+  .wrapper.collapse .sidebar a span {
+    display: none;
+  }
+  
+  .wrapper.collapse .sidebar .sidebar-menu .item .menu-btn {
+    font-size: 23px;
+  }
+  
+  .wrapper.collapse .sidebar .sidebar-menu .item .menu-btn {
+    font-size: 23px;
+  }
+  
+  .wrapper.collapse .sidebar .sidebar-menu .item .sub-menu i {
+    font-size: 18px;
+    padding-left: 3px;
+  }
+  
+  .wrapper.collapse .main-container {
+    width: calc(100% - 70px);
+    margin-left: 70px;
+  }
+  
+  .wrapper .main-container .card {
+    background: rgb(231, 231, 231);
+    padding: 15px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    
+  
+    
+  }
+  
+  .contact-box {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #fff;
+    width: 100%;
+    height: auto;
+  }
+  
+  textarea {
+    height: 400px;
+  }
+  
+  .center {
+    margin: auto;
+    padding: 50px;
+  }
+  
+  .center2 {
+    padding: 50px;
+    
+  }
+  
+  .center h2 {
+    padding-bottom: 20px;
+    font-size: large;
+    font-weight: bold;
+  }
+  
+  .field {
+    width: 100%;
+    border: 2px solid rgba(0, 0, 0, 0);
+    outline: none;
+    background-color: rgba(230, 230, 230, 0.6);
+    padding: 0.5rem 1rem;
+    font-size: 1.1rem;
+    margin-bottom: 22px;
+    transition: 0.3s;
+    height: auto;
+  }
+  
+  .field:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  textarea {
+    min-height: 150px;
+  }
+  
+  .file {
+    padding: 50px 0px;
+  }
+  
+  .btn {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    background-color: #2ecc71;
+    color: #fff;
+    font-size: 1.1rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .btn:hover {
+    background-color: #27ae60;
+  }
+  
+  .field:focus {
+    border: 2px solid rgba(30, 85, 250, 0.47);
+    background-color: #fff;
+  }
+  
+  .resizedTextbox {
+    width: 35%;
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.89);
+    border-radius: 5px;
+    border-color: rgb(221, 220, 220);
+    margin-right: 1500px;
+    margin-left: 0px;
+    font-size:40px;
+  }
+  
+  .resizedTextbox2 {
+    width: 10%;
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0.89);
+    border-radius: 5px;
+    border-color: rgb(221, 220, 220);
+    margin-right: 1500px;
+    margin-left: 0px;
+  }
+  
+  .resizedTextbox3 {
+    width: 100%;
+    height: 750px;
+    background-image: linear-gradient(120deg, #fdfbfb 50%, #ebedee 125%);
+    border-radius: 5px;
+    border-color: rgb(221, 220, 220);
+    margin-right: 1500px;
+    margin-left: 0px;
+    box-shadow: 10px 10px 8px #888888;
+  }
+  
+  .resizedTextbox4 {
+    width: 50%;
+    height: 30px;
+    background-color: rgba(252, 237, 35, 0.952);
+    border-radius: 5px;
+    border-color: rgb(221, 220, 220);
+    margin-right: auto;
+    margin-left: auto;
+  }
+  
+  .resizedTextbox5 {
+    width: 20%;
+    height: 40px;
+    background-color: rgba(247, 247, 247, 0.856);
+    border-radius: 5px;
+    border-color: rgb(221, 220, 220);
+    margin-left: 50px;
+    font-size: 1.2rem;
+  }
+  
+  .resizedTextbox6 {
+    width: 50%;
+    height: 40px;
+    background-color: rgba(247, 247, 247, 0.856);
+    border-radius: 5px;
+    border-color: rgb(221, 220, 220);
+    margin-left: 100px;
+    font-size: 1.2rem;
+  }
+  
+  .resizedTextbox7 {
+    width: 40%;
+    height: 40px;
+    background-color: rgba(13, 253, 33, 0.856);
+    border-radius: 5px;
+    border-color: rgb(221, 220, 220);
+    margin-left: 250px;
+    font-size: 1.3rem;
+  }
+  
+  .movehead {
+    font-size: 18px;
+    padding-left: 100px;
+  }
+  
+  .movehead2 {
+    font-size: 22px;
+    /*background-color: rgb(218, 218, 218);*/
+    width: 100%;
+    padding-left: 100px;
+  }
+  
+  .checkbox {
+    margin-right: 1100px;
+    margin-left: 0px;
+  }
+  
+  ::placeholder {
+    color: rgb(255, 0, 0);
+    font-weight: bolder;
+  }
+  
+  .Textbox2 {
+    width: 10%;
+    height: 30px;
+    background-color: rgba(226, 226, 226, 0.89);
+    border-radius: 5px;
+    border-color: rgb(221, 220, 220);
+  }
+  
+  .Textbox3 {
+    width: 10px;
+    height: 10px;
+    background-color: rgba(9, 250, 49, 0.89);
+    border-radius: 20px;
+    border-color: rgba(255, 255, 255, 0);
+    border: none;
+  }
+  
+  .ul {
+    display: flex;
+  }
+  
+  .ul.li {
+    padding: 0px 0px;
+  }
+  
+  .select {
+    background-color: rgb(255, 0, 0);
+  }
+  
+  form.example input[type="text"] {
+    padding: 20px;
+    font-size: 30px;
+    border: 1px solid grey;
+    float: left;
+    width: 100%;
+    background: #f1f1f1;
+  }
+  
+  .form.example button {
+    float: left;
+    width: 40%;
+    padding: 10px;
+    background: #2196f3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+  }
+  
+  .form.example button:hover {
+    background: #0b7dda;
+  }
+  
+  .form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  .bodytable {
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    height: 250px;
+    margin-left: 50px;
+  }
+  
+  table {
+    width: 90%;
+    border-collapse: collapse;
+  }
+  
+  th,
+  td {
+    border-top: 5px solid rgb(255, 255, 255);
+    padding: 20px 20px;
+    font-size: 20px;
+  }
+  
+  .icon {
+    background-color: #04aa6d; /* Green */
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  
+  .page {
+    border-radius: 50%;
+  }
+  
+  .changePage {
+    margin-top: -80px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 30px;
+  }
+  
+  td button {
+    width: 40%;
+    border: none;
+    border-radius: 20px;
+    background-color: rgb(0, 164, 37);
+    color: rgb(255, 255, 255);
+    padding: 7px 20px;
+    margin-left: 50px;
+    font-size: 18px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: rgba(218, 218, 218, 0.994);
+  }
+  
+  .boxmoney {
+    width: 50%;
+    border: none;
+    border-radius: 20px;
+    background-color: rgb(0, 164, 37);
+    color: rgb(255, 255, 255);
+    padding: 7px 20px;
+    margin-top: 280px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 15px;
+  }
+  
+  @media only screen and (max-width: 800px) {
+    .wrapper .sidebar {
+    z-index: 1;
+    background: #852b3a;
+    position: fixed;
+    top: 50px;
+    width: 100%;
+    height: 100%;
+    transition: 0.3s;
+    transition-property: width;
+    overflow-y: auto;
+  }
+  
+  .wrapper .sidebar .sidebar-menu {
+    overflow: hidden;
+    padding-bottom: 75px;
+    cursor: pointer;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .profile img {
+    margin: 20px 0;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .wrapper .sidebar .sidebar-menu .item .sub-menu a {
+    display: block;
+    position: relative;
+    color: #fff;
+    white-space: nowrap;
+    font-size: 15px;
+    padding: 10px;
+    transition: 0.3s;
+    transition-property: background;
+  }
+  .wrapper .sidebar .sidebar-menu .item .menu-btn .drop-down {
+    float: right;
+    font-size: 5px;
+    margin-top: 3px;
+  }
+  .wrapper .sidebar .sidebar-menu .item {
+    width: 100%;
+    overflow: hidden;font-size: 5px;
+    font-size: 15px;
+  }
+  
+  
+  .wrapper .main-container {
+    width: (100% - 250px);
+    margin-top: 70px;
+    margin-left: 150px;
+    padding: 15px;
+    background: url(background.jpg) no-repeat;
+    background-size: cover;
+    height: 100vh;
+    transition: 0.3s;
+  }
+  
+  .wrapper .main-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .wrapper .main-container .card {
+    background: rgb(140, 140, 140);
+    padding: 15px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    width: 100%;
+    height: auto;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item .menu-btn:hover {
+    background-color: #cd0000;
+    transition: 0.3s;
+    /*width: 100;*/
+  }
+  
+  .wrapper .header .header-menu ul li a:hover {
+    background: #cd0000;
+    color: #fff;
+    
+  }
+  .resizedTextbox {
+    width: 75%;
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.89);
+    border-radius: 5px;
+    border-color: rgb(221, 220, 220);
+    margin-right: 1500px;
+    margin-left: 0px;
+    font-size:20px;
+  }
+  
+  .resizedTextbox2 {
+    width: 10%;
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0.89);
+    border-radius: 5px;
+    border-color: rgb(221, 220, 220);
+    margin-right: 1500px;
+    margin-left: 0px;
+    
+  }
+  
+  .resizedTextbox3 {
+    width: 200%;
+    height: 750px;
+    background-image: linear-gradient(120deg, #fdfbfb 50%, #ebedee 125%);
+    border-radius: 5px;
+    border-color: rgb(221, 220, 220);
+    margin-right: 1500px;
+    margin-left: -70px;
+    box-shadow: 10px 10px 8px #888888;
+  }
+  
+  .resizedTextbox4 {
+    width: 50%;
+    height: 30px;
+    background-color: rgba(252, 237, 35, 0.952);
+    border-radius: 5px;
+    border-color: rgb(221, 220, 220);
+    margin-right: auto;
+    margin-left: auto;
+  }
+  
+  .movehead {
+    font-size: 18px;
+    padding-left: 10px;
+  }
+    
+  .movehead2 {
+    font-size: 15px;
+    /*background-color: rgb(218, 218, 218);*/
+    width: 100%;
+    padding-left: 10px;
+  }
+  
+  .Textbox2 {
+    width: 80%;
+    height: 30px;
+    background-color: rgba(226, 226, 226, 0.89);
+    border-radius: 5px;
+    border-color: rgb(221, 220, 220);
+  }
+  button{
+   
+    width:100%;
+    height:30px;
+  }
+  
+  
+  .bodytable {
+    width: 10%;
+    display: flex;
+    justify-content: left;
+    height: 250px;
+    margin-left: 1px;
+  }
+  
+  table {
+    width: 50%;
+    border-collapse: collapse;
+  }
+  
+  th,
+  td {
+    border-top: 5px solid rgb(255, 255, 255);
+    padding: 20px 20px;
+    font-size: 20px;
+  }
+  
+  }

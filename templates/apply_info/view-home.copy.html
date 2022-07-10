@@ -1,0 +1,78 @@
+{% extends 'Menubar-Template.html' %} 
+{% load static %}
+{% block content %}
+
+{% for scholar in scholars %}
+
+<style>
+  @media only screen and (max-width: 800px) {
+ 
+    .message-body {
+      font-size:1px;
+    }
+    
+  }
+  </style>
+
+<script>
+    function call(info_id){
+  
+      Swal.fire({
+        "title":"ต้องการสมัครทุนนี้ใช่หรือไม่ ?  ",
+        "icon":"question",
+        "showCancelButton":true,
+        "cancelButtonText":"ย้อนกลับ",
+        "confirmButtonText":"สมัครทุน"
+      })
+      .then(function (result){
+        if (result.isConfirmed){
+          window.location.href="/checkInfo/"+info_id
+        }
+      })
+  
+    }
+    
+
+</script>
+
+<article class="message is-success">
+<div class="message-header">
+    
+    <p>ชื่อ: {{scholar.si_name}}</p>
+    <a href = "/home"><button   class="delete" aria-label="delete"></button></a>
+  </div>
+
+<div class="message-body">
+        <img src="{{scholar.si_photo_bg.url}}"><br>
+        <h2 align="left">
+        
+        <p style="text-indent:8em;"><b><font size="6">รายละเอียด : {{scholar.si_description}} </b></font><b></p>
+        <p style="text-indent:8em;"><b><font size="6" >เกรด: {{scholar.si_grade_require}}</font></b></p>
+        <p style="text-indent:8em;"><b><font size="6", font color="red" >หมายเหตุ : </font></b><font size="5">{{scholar.si_note}}</font></p>
+        <p style="text-indent:8em;"><b><font size="5" >จำนวนเงินรวม: {{scholar.si_total_amount}}</font></b></p>
+        <p style="text-indent:8em;"><b><font size="5" >จำนวนเงินต่อคน: {{scholar.si_individual_amount}}</font></b></p>
+        <p style="text-indent:8em;"><b><font size="5" >ที่มาของทุน: {{scholar.si_source}}</font></b></p>
+        
+
+
+        {% for key1,value1 in datajson.items %}
+        <p style="text-indent:8em;"><b><font size="5" >ผู้มอบทุน {{value1}}</font></b></p>
+        {%endfor%}<br>
+        <p style="text-indent:8em;"><b><font size="5" >สิ้นสุดวันรับสมัคร: {{scholar.si_expire_time}}<br></font></b></p>
+        </h2>
+        {%if scholar.si_path_to_pdf%}
+        <br><a href="{{scholar.si_path_to_pdf.url}}"> <button class="button is-danger is-medium is-rounded is-fullwidth "><i class="fas fa-file-pdf">  Download เอกสารทางการ </i> </button></a><br>
+        {%endif%}
+
+        {% if check %}
+        <button class="button is-success is-medium is-rounded is-fullwidth" onclick="call({{scholar.id}})"> สมัครทุน </i> </button>
+        {% else %}
+        <a href = "/checkInfo/{{scholar.id}}"><button class="button is-warning is-medium is-rounded is-fullwidth" onclick=""> แก้ไขข้อมูลสมัครทุน </i> </button></a>
+        {% endif %}
+    <h2>
+</div>
+</article>
+
+{% endfor %}
+
+{% endblock %}

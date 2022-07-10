@@ -1,0 +1,22 @@
+{% extends 'Menubar-Template.html' %} 
+{% load static %}
+{% block content %}
+
+{% for scholar in scholars %}
+    <h2>ชื่อ: {{scholar.si_name}}<br>
+
+        <img src="{{scholar.si_photo_bg.url}}"><br>
+        รายละเอียด: {{scholar.si_description}} เกรด: {{scholar.si_grade_require}}<br>
+        หมายเหตุ: {{scholar.si_note}}<br>
+        จำนวนเงินรวม: {{scholar.si_total_amount}}
+         จำนวนเงินต่อคน: {{scholar.si_individual_amount}}
+         จำนวนคน: {{scholar.si_max_scholar}}<br>
+        ที่มาของทุน: {{scholar.si_source}}<br>
+        ผู้มอบทุน {{p}}
+        
+        สิ้นสุดวันรับสมัคร: {{scholar.si_expire_time}}<br>
+        <a href="{{scholar.si_path_to_pdf.url}}"> <button class="button is-primary is-medium is-fullwidth"><i class="fas fa-file-pdf">  Download เอกสารทางการ </i> </button></a>
+    <h2>
+{% endfor %}
+
+{% endblock %}

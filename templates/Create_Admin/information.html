@@ -1,0 +1,162 @@
+{% extends 'Menubar-Template.html' %}
+{% load static %}
+{% block content %}
+<script src='https://cdn.tiny.cloud/1/h3zt1lw1emdet6rxm1vos4jkjli5161zjiq3rn6q0qemmc98/tinymce/5/tinymce.min.js' referrerpolicy="origin">
+</script>
+<script>
+  tinymce.init({
+    selector: '#mytextarea',
+    plugins: ['table','print'],
+    table_use_colgroups: true
+  });
+</script>
+
+<script>
+  // เก๊าแก้ไขหน้านี้ ถ้าอยากได้รูปแบบเดิม โค้ดอยู่ที่ information_old.html
+  updateList = function () {
+    var input = document.getElementById('images_news');
+    var output = document.getElementById('fileList');
+
+    output.innerHTML = '<ul>';
+    for (var i = 0; i < input.files.length; ++i) {
+      output.innerHTML += '<li>' + input.files.item(i).name + '</li>';
+    }
+    output.innerHTML += '</ul>';
+  }
+</script>
+<script>
+  updateList2 = function () {
+    var input = document.getElementById('file_news');
+    var output = document.getElementById('fileList2');
+
+    output.innerHTML = '<ul>';
+    for (var i = 0; i < input.files.length; ++i) {
+      output.innerHTML += '<li>' + input.files.item(i).name + '</li>';
+    }
+    output.innerHTML += '</ul>';
+  }
+</script>
+{%if messages %}
+{%for m in messages %}
+<script>
+  Swal.fire({
+    "title": "สำเร็จ",
+    "text": "{{m}}",
+    "icon": "success"
+  })
+</script>
+{% endfor %}
+{% endif %}
+
+
+
+<div class="center">
+  <h2>สร้างประชาสัมพันธ์</h2>
+</div>
+  <form id = myFormId action="information" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!--ชื่อข่าวประชาสัมพันธ์-->
+    <div class="field is-horizontal">
+      <div class="field-label is-normal">
+          <label class="label">ชื่อข่าวประชาสัมพันธ์</label>
+      </div>
+      <div class="field-body">
+          <div class="field">
+              <p class="control">
+                  <input type="text" class="field" placeholder="หัวข้อประชาสัมพันธ์" name="head_news" required>
+              </p>
+          </div>
+      </div>
+    </div>
+    <!--รายละเอียดข่าวประชาสัมพันธ์-->
+    <div class="field is-horizontal">
+      <div class="field-label is-normal">
+          <label class="label">รายละเอียดข่าวประชาสัมพันธ์</label>
+      </div>
+      <div class="field-body">
+          <div class="field">
+              <p class="control">
+                  <textarea id="mytextarea" name="detail_news">
+                    กรุณากรอกเนื้อหา
+                  </textarea>
+
+              </p>
+          </div>
+      </div>
+    </div>
+    <!--วันหมดอายุของการประกาศ-->
+    <div class="field is-horizontal">
+      <div class="field-label is-normal">
+          <label class="label">วันหมดอายุของการประกาศ</label>
+      </div>
+      <div class="field-body">
+          <div class="field">
+              <p class="control">
+                <input type="date" class="field" name="date_news" required>
+              </p>
+          </div>
+      </div>
+    </div>
+    <!--รูปภาพประชาสัมพันธ์ทุน-->
+    <div class="field is-horizontal">
+      <div class="field-label is-normal">
+        <label class="label">รูปภาพประชาสัมพันธ์ทุน</label>
+      </div>
+      <div class="field-body file has-name is-fullwidth">
+        <div class="field">
+          <label class="file-label">
+            <input class="file-input" type="file" name="images_news" id="images_news"
+                accept="image/jpeg,image/gif,image/png" onchange="javascript:updateList()" required>
+            <span class="file-cta">
+              <span class="file-icon">
+                <i class="fas fa-upload"></i>
+              </span>
+              <span class="file-label">
+                  เลือกไฟล์
+              </span>
+            </span>
+            <span class="file-name">
+              <div id="fileList"> อัพโหลดไฟล์ภาพ </div>
+            </span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <!--ไฟล์รายละเอียดทุน-->
+    <div class="field is-horizontal">
+      <div class="field-label is-normal">
+          <label class="label">ไฟล์รายละเอียดทุน</label>
+      </div>
+      <div class="field-body file has-name is-fullwidth">
+          <div class="field">
+              <label class="file-label">
+                  <input class="file-input" type="file" name="file_news" id="file_news" accept="application/pdf"
+                          onchange="javascript:updateList2()">
+                  <span class="file-cta">
+                      <span class="file-icon">
+                          <i class="fas fa-upload"></i>
+                      </span>
+                      <span class="file-label">
+                          เลือกไฟล์
+                      </span>
+                  </span>
+                  <span class="file-name">
+                    <div id="fileList2">อัพโหลดไฟล์ *.pdf </div>
+                  </span>
+              </label>
+          </div>
+      </div>
+    </div>
+    <button type="submit" id ="myButtonID" class="button is-success is-fullwidth">Send</button>
+</form>
+<script type="text/javascript">
+   
+  $('#myFormId').submit(function(){
+      $("#myButtonID", this)
+        .html("Please Wait...")
+        .attr('disabled', 'disabled');
+      return true;
+  });
+     
+  </script>
+{% endblock %}

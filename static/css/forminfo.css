@@ -1,0 +1,510 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@200&display=swap');
+@media only screen and (min-width: 2500px) {
+
+  * {
+    font-family: 'Prompt', sans-serif;
+  }
+
+  body {
+    background-color: rgb(82, 1, 1);
+  }
+
+  .box {
+    background-color: rgb(230, 230, 227);
+    text-align: center;
+    border-color: blueviolet;
+  }
+  .boxback{
+    width:70%;
+    background-color:rgb(228, 228, 226);
+    padding:5px;
+  }
+
+  ::placeholder {
+    color: rgb(158, 79, 50);
+    font-weight: bolder;
+  }
+  .select{
+    margin-top: 5px;
+    margin-left: 5px;
+  }
+  
+  .texthead{
+    font-size: 30px;
+    text-align: center;
+    color:white;
+  }
+  .image{
+    width:250px ;
+    height:250px;
+    padding:10px;
+    display: block;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .resizedTextbox {
+    width: 250px;
+    height: 40px;
+    background-color: white;
+    border-radius: 5px;
+    border-color: rgb(221, 220, 220);
+    margin-top: 7px;
+    margin-left: 10px;
+    padding-right:10px;
+  }
+
+  .resizedTextbox2 {
+    width: 250px;
+    height: 40px;
+    background-color: white;
+    border-radius: 5px;
+    border-color: rgb(221, 220, 220);
+    margin-top: 7px;
+    margin-left: 10px;
+    margin-right:10px;
+  }
+  .resizedTextbox3 {
+    width: 200px;
+    height: 40px;
+    background-color: white;
+    border-radius: 5px;
+    border-color: rgb(221, 220,220);
+    font-size:16px;
+    margin: 5px;
+    padding: 2px;
+    
+  }
+  .resizedTextbox4 {
+    width: 150px;
+    height: 40px;
+    background-color: white;
+    border-radius: 5px;
+    border-color: rgb(221, 220,220);
+    font-size:16px;
+    margin: 5px;
+    padding: 2px;
+    
+  }
+
+  .upload{
+    margin-top: 20px;
+  }
+  hr {
+    border-top: 5px solid rgb(82, 1, 1);
+  }
+  
+  }
+  @media only screen and (max-width: 1000px) {
+  *  {
+    font-family: 'Prompt', sans-serif;
+  }
+
+  body {
+    background-color: rgb(82, 1, 1);
+  }
+
+  
+
+  .box {
+    background-color: rgb(238, 238, 236);
+  }
+  .boxback{
+    background-color:rgb(238, 238, 236);
+    padding:10px;
+  }
+  .select{
+    margin-top: 5px;
+    margin-left: 5px;
+  }
+  ::placeholder {
+    color: rgb(158, 79, 50);
+    font-weight: bolder;
+  }
+  .image{
+    width:150px ;
+    height:150px;
+    padding:10px;
+    display: block;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .texthead{
+    font-size: 18px;
+    text-align: center;
+    color:white;
+  }
+  .resizedTextbox {
+    width: 200px;
+    height: 40px;
+    background-color: white;
+    border-radius: 5px;
+    border-color: rgb(221, 220, 220);
+    font-size:16px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left:5px;
+    margin-right: 5px;
+    padding: 2px 2px;
+  }
+  .resizedTextbox3 {
+    width: 230px;
+    height: 40px;
+    background-color: white;
+    border-radius: 5px;
+    border-color: rgb(221, 220, 220);
+    font-size:16px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left:5px;
+    margin-right: 5px;
+    padding: 2px 2px;
+  }
+
+  .resizedTextbox2 {
+    width: 100px;
+    height: 40px;
+    background-color: white;
+    border-radius: 5px;
+    border-color: rgb(221, 220, 220);
+    font-size:16px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
+    padding: 2px;
+  }
+  .resizedTextbox3 {
+    width: 200px;
+    height: 40px;
+    background-color: white;
+    border-radius: 5px;
+    border-color: rgb(221, 220,220);
+    font-size:16px;
+    margin: 5px;
+    padding: 2px;
+    
+  }
+  .resizedTextbox4 {
+    width: 150px;
+    height: 40px;
+    background-color: white;
+    border-radius: 5px;
+    border-color: rgb(221, 220,220);
+    font-size:16px;
+    margin: 5px;
+    padding: 2px;
+    
+  }
+  hr {
+    border-top: 5px solid rgb(82, 1, 1);
+  }
+
+  .upload{
+    margin-top: 20px;
+  }
+  }
+  
+  @media only screen and (max-width: 500px ) {
+    *  {
+      font-family: 'Prompt', sans-serif;
+    }
+  
+    body {
+      background-color: rgb(82, 1, 1);
+    }
+   
+    .box {
+      background-color: rgb(238, 238, 236);
+    }
+    .boxback{
+      background-color:rgb(238, 238, 236);
+      padding:10px;
+    }
+    
+    ::placeholder {
+      color: rgb(158, 79, 50);
+      font-weight: bolder;
+    }
+    .image{
+      width:150px ;
+      height:150px;
+      padding:10px;
+      display: block;
+      align-items: center;
+      justify-content: space-between;
+      margin-right: auto;
+      margin-left: auto;
+    }
+    .texthead{
+      font-size: 16px;
+      text-align: center;
+      color:white;
+    }
+    .resizedTextbox {
+      width: 250px;
+      height: 40px;
+      background-color: white;
+      border-radius: 5px;
+      border-color: rgb(221, 220, 220);
+      font-size:16px;
+      margin-top: 2px;
+      margin-bottom: 2px;
+      padding: 2px;
+      grid-template-columns: 1frl;
+    }
+  
+    .resizedTextbox2 {
+      width: 250px;
+      height: 40px;
+      background-color: white;
+      border-radius: 5px;
+      border-color: rgb(221, 220, 220);
+      font-size:16px;
+      padding: 2px;
+      grid-template-columns: 1frl;
+    }
+    .resizedTextbox3 {
+      width: 200px;
+      height: 40px;
+      background-color: white;
+      border-radius: 5px;
+      border-color: rgb(221, 220,220);
+      font-size:16px;
+      margin: 5px;
+      padding: 2px;
+      
+    }
+    .resizedTextbox4 {
+      width: 150px;
+      height: 40px;
+      background-color: white;
+      border-radius: 5px;
+      border-color: rgb(221, 220,220);
+      font-size:16px;
+      margin: 5px;
+      padding: 2px;
+      
+    }
+    hr {
+      border-top: 5px solid rgb(82, 1, 1);
+    }
+  
+    .upload{
+      margin-top: 20px;
+    }
+    }
+    @media only screen and (max-width: 2500px ) {
+      *  {
+        font-family: 'Prompt', sans-serif;
+      }
+    
+      body {
+        background-color: rgb(82, 1, 1);
+      }
+    
+      .box {
+        background-color: rgb(238, 238, 236);
+      }
+      .boxback{
+        
+        background-color:rgb(238, 238, 236);
+        padding-left:10px;
+        padding-right:10px;
+      }
+      .select{
+        margin-top: 5px;
+        margin-left: 5px;
+      }
+      ::placeholder {
+        color: rgb(158, 79, 50);
+        font-weight: bolder;
+      }
+      .image{
+        width:150px ;
+        height:150px;
+        padding:10px;
+        display: block;
+        align-items: center;
+        justify-content: space-between;
+        margin-right: auto;
+        margin-left: auto;
+      }
+      .texthead{
+        font-size: 16px;
+        text-align: center;
+        color:white;
+      }
+      .resizedTextbox {
+        width: 250px;
+        height: 40px;
+        background-color: white;
+        border-radius: 5px;
+        border-color: rgb(221, 220,220);
+        font-size:16px;
+        margin: 5px;
+        padding: 2px;
+        
+      }
+    
+      .resizedTextbox2 {
+        width: 250px;
+        height: 40px;
+        background-color: white;
+        border-radius: 5px;
+        border-color: rgb(221, 220, 220);
+        font-size:16px;
+        padding: 2px;
+        
+      }
+      .resizedTextbox3 {
+        width: 220px;
+        height: 40px;
+        background-color: white;
+        border-radius: 5px;
+        border-color: rgb(221, 220,220);
+        font-size:16px;
+        margin: 5px;
+        padding: 2px;
+        
+        
+      }
+      .resizedTextbox4 {
+        width: 100px;
+        height: 40px;
+        background-color: white;
+        border-radius: 5px;
+        border-color: rgb(221, 220,220);
+        font-size:16px;
+        margin: 5px;
+        padding: 2px;
+        
+      }
+      hr {
+        border-top: 5px solid rgb(82, 1, 1);
+      }
+    
+      .upload{
+        margin-top: 20px;
+      }
+      }  
+      @media only screen and (max-width: 800px) {
+        *  {
+          font-family: 'Prompt', sans-serif;
+        }
+      
+        body {
+          background-color: rgb(82, 1, 1);
+        }
+        
+        .box {
+          background-color: rgb(238, 238, 236);
+        }
+        .boxback{
+          background-color:rgb(238, 238, 236);
+          padding:10px;
+        }
+        .select{
+          margin-top: 5px;
+          margin-left: 5px;
+          margin-right: 500px;
+        }
+        ::placeholder {
+          color: rgb(158, 79, 50);
+          font-weight: bolder;
+        }
+        .image{
+          width:150px ;
+          height:150px;
+          padding:10px;
+          display: block;
+          align-items: center;
+          justify-content: space-between;
+          margin-right: auto;
+          margin-left: auto;
+        }
+        .texthead{
+          font-size: 18px;
+          text-align: center;
+          color:white;
+        }
+        .resizedTextbox {
+          width: 180px;
+          height: 40px;
+          background-color: rgb(255, 255, 255);
+          border-radius: 5px;
+          border-color: rgb(221, 220, 220);
+          font-size:16px;
+          margin-top: 2px;
+          margin-bottom: 2px;
+          margin-left:5px;
+          margin-right: 500px;
+          padding: 10px 2px;
+        }
+        .resizedTextbox3 {
+          width: 200px;
+          height: 40px;
+          background-color: white;
+          border-radius: 5px;
+          border-color: rgb(221, 220, 220);
+          font-size:16px;
+          margin-top: 2px;
+          margin-bottom: 2px;
+          margin-left:5px;
+          margin-right: 5px;
+          padding: 2px 2px;
+        }
+      
+        .resizedTextbox2 {
+          width: 150px;
+          height: 40px;
+          background-color: white;
+          border-radius: 5px;
+          border-color: rgb(221, 220, 220);
+          font-size:16px;
+          margin-top: 2px;
+          margin-bottom: 2px;
+          margin-left:5px;
+          margin-right: 500px;
+          padding: 2px;
+        }
+        .resizedTextbox3 {
+          width: 200px;
+          height: 40px;
+          background-color: white;
+          border-radius: 5px;
+          border-color: rgb(221, 220,220);
+          font-size:16px;
+          margin-top: 2px;
+          margin-bottom: 2px;
+          margin-left:5px;
+          margin-right: 500px;
+          padding: 2px;
+          
+        }
+        .resizedTextbox4 {
+          width: 150px;
+          height: 40px;
+          background-color: white;
+          border-radius: 5px;
+          border-color: rgb(221, 220,220);
+          font-size:16px;
+          margin-top: 2px;
+          margin-bottom: 2px;
+          margin-left:5px;
+          margin-right: 500px;
+          padding: 2px;
+          
+        }
+        hr {
+          border-top: 5px solid rgb(82, 1, 1);
+        }
+      
+        .upload{
+          margin-top: 20px;
+        }
+        }
+        

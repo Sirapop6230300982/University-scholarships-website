@@ -1,0 +1,26 @@
+{% extends 'Menubar-Template.html' %} 
+{% block content %}
+<h1 class="title is-4"> สร้างแบบฟอร์มการให้คะแนนสัมภาษณ์ </h1>
+{%for key,value in res.items %}
+
+<article class="message is-primary">
+  <div class="message-header">
+    <p>{{key.sws_si_id.si_name}} </p>
+   
+  </div>
+  <div class="message-body">
+      {{key.sws_si_id.si_create_time}}
+      <p>เครื่องมือจัดการแบบฟอร์ม</p>
+      {%if value == True %}
+        <a href="scholarWeightScore/{{key.sws_si_id.id}}"><button class="button is-warning"><p>แก้ไขแบบฟอร์ม</p></button></a>
+      {%else%}
+        <a href="scholarWeightScore/{{key.sws_si_id.id}}"><button class="button is-link"><p>สร้างแบบฟอร์ม</p></button></a>
+      {%endif%}
+
+  </div>
+</article>
+
+
+{%endfor%}
+  
+{% endblock %}

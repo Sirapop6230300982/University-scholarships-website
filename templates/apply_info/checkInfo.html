@@ -1,0 +1,408 @@
+<!-- ไม่ได้ใช้ เก็บไว้ทำเล่นเฉยๆ -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <title>CheckInfo</title>
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+    charset="utf-8"
+  ></script>
+  <link rel="stylesheet" href="{% static 'css/image2.css' %}?{% now " U" %}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma/bulma.css" rel="stylesheet">
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+  <link rel="stylesheet" href="{% static 'css/forminfo.css' %}?{% now " U" %}" />
+</head>
+
+<script type="text/JavaScript">
+  var myform;
+  function init() {
+      //parameter 1 -> id ของ div ที่จะใส่ฟอร์ม
+      //parameter 2 -> option ต่างๆ
+      myform = new longdo.AddressForm('form_div',{
+        layout: longdo.AddressForm.SIMPLE_SUGGEST,  // ใช้ฟอร์มอีกรูปแบบหนึ่ง
+        // language: 'en',                   // ปรับภาษา
+        showLabels: false,                   // ซ่อนคำกำกับช่องใส่ข้อมูล
+        required: {poi: true},               // กำหนดช่องบังคับกรอก
+        debugDiv: 'debugoutput'              // กำหนด div ที่ใช้แสดงข้อมูลจากฟอร์ม
+      });
+  }
+</script>
+
+
+<script type="text/JavaScript">
+
+      $(document).ready(function() {
+      var max      = 10; //maximum input boxes allowed
+      var container         = $(".wraper");  
+      var add      = document.getElementById("temp"); //Plus sign id
+      var x = 1; //input field count intially
+      $(add).click(function(e){         e.preventDefault();
+          if(x < max){ //maximum number of input field allowed
+              x++; //input field increment
+              $(container).append('<div><input class="resizedTextbox" class="input" type="text" placeholder="ทุนการศึกษาที่ได้รับมาแล้ว" \
+                 name="received-scholar"><input class="resizedTextbox" class="input" type="text" placeholder="ปีการศึกษาที่ได้รับ" \
+                  name="received-year-scholar"><input class="resizedTextbox" class="input" type="number" placeholder="มูลค่า" name="prize"><a href="#" \
+                  class="delete">delete</a></div>'); //adding new input field
+          }
+      });
+     
+      $(container).on("click",".delete", function(e){ //user click on remove text
+          e.preventDefault(); $(this).parent('div').remove(); x--;
+      })
+  });
+
+  $(document).ready(function() {
+      var max2      = 10; //maximum input boxes allowed
+      var container2         = $(".wraper2");  
+      var add2      = document.getElementById("temp2"); //Plus sign id
+      var x2 = 1; //input field count intially
+      $(add2).click(function(e){         e.preventDefault();
+          if(x2 < max2){ //maximum number of input field allowed
+              x2++; //input field increment
+              $(container2).append('<div> <div class="select"> \
+      <select name ="title-siblingthai">\
+        <option value="" disabled selected >กรุณาเลือก</option>\
+        <option value = "นาย" >นาย</option>\
+        <option value = "นางสาว" >นางสาว</option>\
+        <option value = "นาง" >นาง</option>\
+      </select>\
+     </div> \
+    <input class="resizedTextbox" class="input" type="text" placeholder="ชื่อ" name="firstname-sibling">\
+    <input class="resizedTextbox" class="input" type="text" placeholder="ชื่อกลางพี่น้อง" name="middlename-sibling">\
+    <input class="resizedTextbox" class="input" type="text" placeholder="นามสกุล" name="lastname-sibling"><br>\
+    <br>\
+    <input class="resizedTextbox" class="input" type="text" placeholder="การศึกษา" name="education-sibling">\
+    <input class="resizedTextbox" class="input" type="text" placeholder="อาชีพ" name="career-sibling">\
+    <input class="resizedTextbox" class="input" type="text" placeholder="สถานที่ประกอบการ" name="workplace-sibling"> \
+    <a href="#" class="delete">delete</a></div>'); //adding new input field
+          }
+      });
+     
+      $(container2).on("click",".delete", function(e){ //user click on remove text
+          e.preventDefault(); $(this).parent('div').remove(); x2--;
+      })
+  });
+  </script>
+  <script type="text/JavaScript">
+    $(document).ready(function() {
+  
+    var readURL = function(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+  
+            reader.onload = function (e) {
+                $('.profile-pic').attr('src', e.target.result);
+            }
+    
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+   
+    $(".file-upload").on('change', function(){
+        readURL(this);
+    });
+    
+    $(".upload-button").on('click', function() {
+       $(".file-upload").click();
+    });
+  });
+  </script>
+
+<script>
+  updateList2 = function () {
+    var input = document.getElementById('myPdf');
+    var output = document.getElementById('fileList2');
+
+    output.innerHTML = '<ul>';
+    for (var i = 0; i < input.files.length; ++i) {
+      output.innerHTML += '<li>' + input.files.item(i).name + '</li>';
+    }
+    output.innerHTML += '</ul>';
+  }
+</script>
+
+<script>
+
+</script>
+
+
+
+<body>
+  <div align = "center">
+  <img src="{% static 'images/11.gif' %}" width="150px" height="150px" vspace="15">
+  </div>
+    <div class="container">
+    <form action ="/checkInfo/{{info_id}}" method="POST"  enctype="multipart/form-data" >
+    
+    
+    {% csrf_token %}
+    <h1 align = 'center'><b><font size="5px" color="white"> ตรวจสอบการกรอกประวัติสำหรับใช้สมัครทุนการศึกษา </font></b></h1> 
+        
+    <div class="box">       
+
+      <div class="box">
+        <h6 class="title is-6 has-text-centered">รูปประจำตัว </h6>
+        <div class="avatar-wrapper">
+          
+          <img class="profile-pic" src="{{pic.sp_path_to_avatar.url}}" />
+          <div class="upload-button">
+            <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+          </div>
+        </div>
+        <span class="tag is-warning"><h6 class="title is-6 has-text-centered"><i>กรุณาอัพโหลดภาพประจำตัว</i></h6></span>
+
+      </div>
+
+       
+        <br>
+
+      <h2 align = "right"><b><font face="Arial">อาจารย์ที่ปรึกษา</font></b></h2>
+      <div class="level-right">
+      <input class="resizedTextbox" class="input is-right" type="text"  placeholder="ชื่อ-สกุล"name="advisor_professor" value="{{ checkin.sp_advisor_professor}}" readonly> 
+      </div>
+
+
+    <br>
+    <h2><b><font face="Arial">ประวัติส่วนตัว</font></b></h2>
+    คำนำหน้า:<input class="resizedTextbox" class="input" type="text"  placeholder="คำนำหน้า"name="title-thai" value="{{checkin.sp_title_th}}" readonly>
+    
+      
+      ชื่อ:<input class="resizedTextbox" class="input" type="text"  placeholder="ชื่อ"name="firstname-th" value="{{checkin.sp_firstname_th}}" readonly>
+      ชื่อกลาง:<input class="resizedTextbox" class="input" type="text" placeholder="ชื่อกลาง" name="middlename-th"  value="{{checkin.sp_middlename_th}}" readonly>
+      นามสกุล:<input class="resizedTextbox" class="input" type="text" placeholder="นามสกุล" name="lastname-th"  value="{{checkin.sp_lastname_th}}" readonly>
+      รหัสนิสิต:<input class="resizedTextbox" class="input" type="text" placeholder="รหัสนิสิต" name ="std"  value="{{checkin.sp_std_code}}" readonly><br>
+      <br>
+      Prefix:<input class="resizedTextbox" class="input" type="text"  placeholder="title"name="title-eng" value="{{checkin.sp_title_en}}" readonly>
+    
+    Firstname:<input class="resizedTextbox" class="input" type="text" placeholder="firstname" name="firstname-eng" value="{{checkin.sp_firstname_en}}" readonly>
+    Middlename:<input class="resizedTextbox" class="input" type="text" placeholder="middlename" name="middlename-eng" value="{{checkin.sp_middlename_en}}" readonly>
+    Surname:<input class="resizedTextbox" class="input" type="text" placeholder="lastname" name = "lastname-eng" value="{{checkin.sp_lastname_en}}" readonly>
+    วันเกิด:<input class="resizedTextbox" class="input" type="date" placeholder="วันเกิด" name = "birthday" value="{{checkin.sp_date_of_birth|date:'Y-m-d'}}" readonly><br>
+    <br>
+    สาขา:<input class="resizedTextbox" class="input" type="text" placeholder="สาขา" name = "major" value="{{checkin.sp_major}}" readonly>
+    เกรด:<input class="resizedTextbox" class="input" type="text" placeholder="เกรด" name = "grade" value="{{checkin.sp_grade}}" readonly>
+    ที่อยู่:<input class="resizedTextbox" class="input" type="text" placeholder="ที่อยู่" name = "address" value="{{checkin.sp_std_address}}" readonly>
+    เบอร์โทรศัพท์<input class="resizedTextbox" class="input" type="text" placeholder="เบอร์โทร" name = "phone" value="{{checkin.sp_std_tel_no}}" readonly>
+    <hr>
+
+    <h2><b><font face="Arial">ประวัติครอบครัว - บิดา</font></b></h2>
+    คำนำหน้า:<input class="resizedTextbox" class="input" type="text"  placeholder="คำนำหน้าพ่อ"name="title-dadthai" value="{{checkin.sp_father_title}}" readonly>
+
+    ชื่อ:<input class="resizedTextbox" class="input" type="text" placeholder="ชื่อบิดา" name="firstname-dad" value="{{checkin.sp_father_firstname}}" readonly>
+    ชื่อกลาง:<input class="resizedTextbox" class="input" type="text" placeholder="ชื่อกลางบิดา" name="middlename-dad" value="{{checkin.sp_father_middlename}}" readonly>
+    นามสกุล:<input class="resizedTextbox" class="input" type="text" placeholder="นามสกุล" name="lastname-dad" value="{{checkin.sp_father_lastname}}" readonly><br> 
+    
+    <h2><b><font face="Arial">สถานะ</font></b></h2>
+    สถานะ:<input class="resizedTextbox" class="input" type="text"  placeholder="สถานะบิดา"name="statuslife-dad" value="{{checkin.sp_father_statuslife}}" readonly>
+    วัน/เดือน/ปีเกิด:<input class="resizedTextbox" class="input" type="date" placeholder="วันเดือนปีเกิด" name="birthday-dad" value="{{checkin.sp_father_date_of_birth|date:'Y-m-d'}}" readonly>
+    อายุ:<input class="resizedTextbox" class="input" type="number" placeholder="อายุ" name="age-dad" value="{{checkin.sp_father_age}}" readonly>ปี
+    ที่อยู่:<input class="resizedTextbox" class="input" type="text" placeholder="ที่อยู่" name="address-dad" value="{{checkin.sp_father_address}}" readonly>
+    เบอร์โทรศัพท์:<input class="resizedTextbox" class="input" type="text" placeholder="เบอร์โทร" name="Tel-dad" value="{{checkin.sp_father_tel_no}}" readonly><br>
+    <h2><b><font face="Arial">สถานะสมรส</font></b></h2>
+    สถานะ:<input class="resizedTextbox" class="input" type="text" placeholder="สถานะของพ่อ" name="status-married-dad" value="{{checkin.sp_father_status_married}}" readonly>
+    รายได้:<input class="resizedTextbox" class="input" type="number" placeholder="รายได้" name="Income-dad" value="{{checkin.sp_father_income}}" readonly>บาท
+    อาชีพ:<input class="resizedTextbox" class="input" type="text" placeholder="อาชีพ" name="career-dad" value="{{checkin.sp_father_career}}" readonly>
+    สถานที่ประกอบการ:<input class="resizedTextbox" class="input" type="text" placeholder="สถานที่ประกอบการ" name="workplace-dad" value="{{checkin.sp_father_workplace}}" readonly>
+    <hr>
+
+    <h2><b><font face="Arial">ประวัติครอบครัว-มารดา</font></b></h2>
+    คำนำหน้า:<input class="resizedTextbox" class="input" type="text" placeholder="คำนำหน้าแม่" name="title-momthai" value="{{checkin.sp_mother_title}}" readonly>
+    ชื่อ:<input class="resizedTextbox" class="input" type="text" placeholder="ชื่อมารดา" name="firstname-mom" value="{{checkin.sp_mother_firstname}}" readonly>
+    ชื่อกลาง:<input class="resizedTextbox" class="input" type="text" placeholder="ชื่อกลางมารดา" name="middlename-mom" value="{{checkin.sp_mother_middlename}}" readonly>
+    นามสกุล:<input class="resizedTextbox" class="input" type="text" placeholder="นามสกุล" name="lastname-mom" value="{{checkin.sp_mother_lastname}}" readonly><br> 
+
+    <h2><b><font face="Arial">สถานะ</font></b></h2>
+    สถานะ:<input class="resizedTextbox" class="input" type="text"  placeholder="สถานะมารดา"name="statuslife-mom" value="{{checkin.sp_mother_statuslife}}" readonly>
+    วัน/เดือน/ปีเกิด:<input class="resizedTextbox" class="input" type="date" placeholder="วันเดือนปีเกิด" name="birthday-mom" value="{{checkin.sp_mother_date_of_birth|date:'Y-m-d'}}" readonly>
+    อายุ:<input class="resizedTextbox" class="input" type="number" placeholder="อายุ" name="age-mom" value="{{checkin.sp_mother_age}}" readonly>ปี
+    ที่อยู่:<input class="resizedTextbox" class="input" type="text" placeholder="ที่อยู่" name="address-mom" value="{{checkin.sp_mother_address}}" readonly>
+    เบอร์โทรศัพท์:<input class="resizedTextbox" class="input" type="text" placeholder="เบอร์โทร" name="Tel-mom" value="{{checkin.sp_mother_tel_no}}" readonly>
+    <br>
+    
+    <h2><b><font face="Arial">สถานะสมรส</font></b></h2>
+    สถานะ:<input class="resizedTextbox" class="input" type="text" placeholder="สถานะแต่งงาน" name="status-married-mom" value="{{checkin.sp_mother_status_married}}" readonly>
+    รายได้:<input class="resizedTextbox" class="input" type="number" placeholder="รายได้" name="Income-mom" value="{{checkin.sp_mother_income}}" readonly>บาท
+    อาชีพ:<input class="resizedTextbox" class="input" type="text" placeholder="อาชีพ" name="career-mom" value="{{checkin.sp_mother_career}}" readonly>
+    สถานที่ประกอบการ:<input class="resizedTextbox" class="input" type="text" placeholder="สถานที่ประกอบการ" name="workplace-mom" value="{{checkin.sp_mother_workplace}}" readonly>
+    <hr>
+
+    <h2><b><font face="Arial">พี่น้องร่วมบิดา มารดาเรียงตามลำดับดังนี้</font></b></h2>
+
+
+    
+      {% for json_obj in json_bro %}
+      <div class="wraper2">
+      คำนำหน้า:<input class="resizedTextbox" class="input" type="text" placeholder="คำนำหน้าพี่น้อง" name="title-siblingthai" value="{{json_obj.title_sibling}}"  readonly/>
+      ชื่อ:<input class="resizedTextbox" class="input" type="text" placeholder="ชื่อ" name="firstname-sibling" value="{{json_obj.firstname_sibling}}"  readonly>
+      ชื่อกลาง:<input class="resizedTextbox" class="input" type="text" placeholder="ชื่อกลางพี่น้อง" name="middlename-sibling" value="{{json_obj.middle_sibling}}" readonly/>
+      นามสกุล:<input class="resizedTextbox" class="input" type="text" placeholder="นามสกุล" name="lastname-sibling" value="{{json_obj.lastname_sibling}}" readonly><br>
+      <br>
+      การศึกษา:<input class="resizedTextbox" class="input" type="text" placeholder="การศึกษา" name="education-sibling" value="{{json_obj.education_sibling}}" readonly>
+      อาชีพ:<input class="resizedTextbox" class="input" type="text" placeholder="อาชีพ" name="career-sibling" value="{{json_obj.career_sibling}}" readonly>
+      สถานที่ประกอบการ:<input class="resizedTextbox" class="input" type="text" placeholder="สถานที่ประกอบการ" name="workplace-sibling" value="{{json_obj.workplace_sibling}}" readonly>
+    </div>
+    {%endfor%}
+
+    
+    
+    <hr>
+
+    <h2><b><font face="Arial">รายละเอียดรายได้ของผู้สมัครทุน</font></b></h2>
+    
+      <input class="resizedTextbox" class="input" type="number" placeholder="รายได้ต่อเดือนของนิสิต" name="moneyPerMonth" value="{{checkin.sp_income}}" readonly>บาท
+      
+      <p>ได้รับค่าใช้จ่ายจาก</p>
+      ได้รับเงินจาก:<input class="resizedTextbox" class="input" type="text" placeholder="ได้รับค่าใช้จ่ายจาก" name="patron" value="{{checkin.sp_income_source}}" readonly>
+      <br>
+      ผู้อุปการะเกี่ยวข้องเป็น:<input class="resizedTextbox2" class="input" type="text" placeholder="ในกรณีที่ได้รับค่าใช้จ่ายผู้อุปการะ ผู้อุปการะนั้นเกี่ยวข้องเป็น" name="status-patron" value="{{checkin.sp_patron_relation}}" readonly> 
+      จำนวนบุตรของผู้อุปการะ:<input class="resizedTextbox" class="input" type="text" placeholder="ผู้อุปการะมีบุตรในอุปการะจํานวน" name ="NumOfChild-patron" value="{{checkin.sp_child_in_the_patron}}" readonly>คน
+      อาชีพ:<input class="resizedTextbox" class="input" type="text" placeholder="อาชีพผู้อุปการะ" name="career-patron" value="{{checkin.sp_patron_career}}" readonly>
+      สถานที่ประกอบการ:<input class="resizedTextbox" class="input" type="text" placeholder="สถานที่ทำงานของผู้อุปการะ" name="workplace-patron" value="{{checkin.sp_patron_workplace}}" readonly>
+      เบอร์โทรศัพท์:<input class="resizedTextbox" class="input" type="text" placeholder="เบอร์โทรผู้อุปการะ" name="Tel-patron" value="{{checkin.sp_patron_tel_no}}" readonly><br>
+      <p>ทุนกู้ยืมปัจจุบันของนิสิต</p>
+
+      ประเภททุน:<input class="resizedTextbox" class="input" type="text" placeholder="ทุนกู้ยืมปัจจุบันของนิสิต" name="studenloan" value="{{checkin.sp_loan}}" readonly>
+      
+      <br>
+      <br><p><b><font face="Arial">ผู้สมัครเคยทำงานพิเศษระหว่างหยุดเรียน/ขณะเรียน</font></b></p>
+      <label><b><font face="Arial">เคยทำงานพิเศษไหม</font></b></label>
+      
+      งานพิเศษ:<input class="resizedTextbox2" class="input" type="text" placeholder="เคยทำงานพิเศษไหม" name="pastime" value="{{checkin.sp_parttime}}" readonly>
+   
+      
+      ประเภทงาน:<input class="resizedTextbox2" class="input" type="text" placeholder="ประเภทของงานที่เคยทำและที่ทำอยู่ปัจจุบัน" name="Type-pastime" value="{{checkin.sp_parttime_type}}" readonly>   
+      ถ้าเคย ได้รับเงินเฉลี่ยต่อเดือน:<input class="resizedTextbox" class="input" type="number" placeholder="ถ้าเคย ได้รับค่าจ้างเฉลี่ยต่อเดือน" name="career-income" value="{{checkin.sp_parttime_income}}" readonly>
+      <br><br>
+
+
+      <h2><b><font face="Arial">รายละเอียดทุนที่ผู้สมัครทุนเคยได้รับ</font></b></h2>
+      
+       <div class="wraper">
+        {% for json_obj in json %}
+
+        ทุนที่เคยได้รับ:<input class="resizedTextbox" class="input" type="text" placeholder="ทุนการศึกษาที่ได้รับมาแล้ว" name="received-scholar" value="{{json_obj.name}}" readonly>
+        ปีการศึกษา:<input class="resizedTextbox" class="input" type="text" placeholder="ปีการศึกษาที่ได้รับ" name="received-year-scholar" value="{{json_obj.year}}" readonly>
+        มูลค่า:<input class="resizedTextbox" class="input" type="number" placeholder="มูลค่า" name="prize" value="{{json_obj.prize}}" readonly>บาท
+          
+
+        {%endfor%}
+       
+    
+        <div>
+          
+       </div>
+       <div class ="upload">
+       <div class="box">
+        <h6 class="title is-6"> อัพโหลดไฟล์ *pdf </h6>
+        
+       <div class="file has-name is-boxed">
+        <label class="file-label">
+          <input class="file-input" name="myPdf" id="myPdf" type="file" accept="application/pdf" onchange="javascript:updateList2()" onchange="previewFile()">
+          <span class="file-cta">
+            <span class="file-icon">
+              <i class="fas fa-upload"></i>
+            </span>
+            <span class="file-label">
+              Choose a file…
+            </span>
+          </span>
+          <span class="file-name">
+            <div id="fileList2">None.pdf </div>
+          </span>
+        </label>
+      </div>
+      </div>
+    </div>
+
+
+    <div class="box">
+      <h6 class="title is-6 has-text-centered"> ตัวอย่างไฟล์ </h6>
+    <canvas id="pdfViewer"></canvas>
+    </div>
+
+
+
+     </div>
+
+     
+ 
+    </form>
+    <script>
+    function preview() {
+        frame.src=URL.createObjectURL(event.target.files[0]);
+    }
+    
+    </script>
+          <div class="level-item has-text-centered">
+            <div class="columns" > 
+              <div class="column">
+                <a href="/viewHome/"><input type="submit" value="ยืนยัน" class="button is-primary"></a>
+              </div>
+              <div class = "column">
+                <a href="/viewHome/{{checkin.sa_si_id.id}}/{{request.user.id}}"><input value="ยกเลิก" class="button is-warning"></a>
+              </div>
+          </div>
+
+
+          <script>
+
+var pdfjsLib = window['pdfjs-dist/build/pdf'];
+// The workerSrc property shall be specified.
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://mozilla.github.io/pdf.js/build/pdf.worker.js';
+
+$("#myPdf").on("change", function(e){
+	var file = e.target.files[0]
+	if(file.type == "application/pdf"){
+		var fileReader = new FileReader();  
+		fileReader.onload = function() {
+			var pdfData = new Uint8Array(this.result);
+			// Using DocumentInitParameters object to load binary data.
+			var loadingTask = pdfjsLib.getDocument({data: pdfData});
+			loadingTask.promise.then(function(pdf) {
+			  console.log('PDF loaded');
+			  
+			  // Fetch the first page
+			  var pageNumber = 1;
+			  pdf.getPage(pageNumber).then(function(page) {
+				console.log('Page loaded');
+				
+				var scale = 1.5;
+				var viewport = page.getViewport({scale: scale});
+
+				// Prepare canvas using PDF page dimensions
+				var canvas = $("#pdfViewer")[0];
+				var context = canvas.getContext('2d');
+				canvas.height = viewport.height;
+				canvas.width = viewport.width;
+
+				// Render PDF page into canvas context
+				var renderContext = {
+				  canvasContext: context,
+				  viewport: viewport
+				};
+				var renderTask = page.render(renderContext);
+				renderTask.promise.then(function () {
+				  console.log('Page rendered');
+				});
+			  });
+			}, function (reason) {
+			  // PDF loading error
+			  console.error(reason);
+			});
+		};
+		fileReader.readAsArrayBuffer(file);
+	}
+});
+
+</script>
+</body>
+</html>

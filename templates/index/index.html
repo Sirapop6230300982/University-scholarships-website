@@ -1,0 +1,91 @@
+{% load static %}
+{% load socialaccount %}.
+{%if messages %}
+{%for m in messages %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sidebar Dashboard Template With Sub Menu</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?{% now "U" %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"charset="utf-8"></script>
+    <script src="{% static 'js/jquery.js.js' %}"></script>
+    <script src="{% static 'js/slick.min.js' %}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="header">
+        <div class="icon">
+          <h1>ระบบทุนการศึกษา</h1>
+          <p>คณะวิศวกรรมศาสตร์ ศรีราชา</p>
+        </div>
+        <div class="menu">
+          <ul>
+            <li>
+              สวัสดี คุณ {{ user.socialaccount_set.all.0.extra_data.name }}
+              
+              <a href="{% provider_login_url 'google' %}">เข้าสู่ระบบ</a>
+            
+            </li>
+          </ul>
+        </div>
+    <div class="box">
+      <h2>ข่าวสารประชาสัมพันธ์</h2>
+      {% for new in news%}
+      <h3>{{new.sn_header}}</h3>  
+      </p>
+      {% if new.sn_photo_bg or new.sn_path_to_pdf %}
+      <p data-toggle="collapse" data-parent="accordion" href="#">
+        <a href="/viewpost/{{new.id}}"> <button type="button" class="btn btn-outline-danger btn-sm"> รายละเอียดเพิ่มเติม </a>
+        </button>
+      </p>
+      {% endif %}
+      {%endfor%}
+    </div> 
+    <div class="slide">
+      <figure>
+        <img src="{% static 'images/A1.jpg' %}">
+        <img src="{% static 'images/A2.jpg' %}">
+        <img src="{% static 'images/A3.jpg' %}">
+        <img src="{% static 'images/fโง่.jpg' %}">
+        <img src="{% static 'images/คนหล่อ.jpg' %}">
+      </figure>
+    </div>
+    {% if user.is_authenticated %}
+    {%block js%}
+    <script type="text/javascript">
+      setTimeout(function() {window.location.replace("http://warinnarat.thddns.net:9920/home", "_blank")}, 1000);
+      </script>
+    {%endblock%}
+    {% endif %}
+      
+   
+
+
+
+    <!-- ถ้า ใช้ javascript กันให้ นำไฟล์ ไปใส่ใน  static/js  แล้วเวลาเรียกใช้เรียก {% static 'js/ชื่อไฟล์.js' %} -->
+
+    
+    
+     
+
+ 
+       
+  
+
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $(".sidebar-btn").click(function () {
+          $(".wrapper").toggleClass("collapse");
+        });
+      });
+    </script>
+  </body>
+</html>
+

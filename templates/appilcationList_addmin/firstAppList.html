@@ -1,0 +1,64 @@
+{% extends 'Menubar-Template.html' %} 
+{% load static %}
+{% block content %}
+<form action="firstAppilcationAdmin" method="POST" >
+  {% csrf_token %}
+<div class="field">
+  <label class="label">ค้นหา</label>
+  <div class="control has-icons-left has-icons-right">
+    <input class="input is-success" name = "findstudent" id="findstudent" type="text" placeholder="ชื่อทุน">
+    <span class="icon is-small is-left">
+      <i class="fa-solid fa-magnifying-glass"></i></i>
+    </span>
+  </div>
+  <p class="help is-success">ไม่จำเป็นต้องค้นหาเป็นคำ</p>
+</div>
+</form>
+{% for scholar in scholars %}
+  {%if scholar.si_endtime >= today  or scholar.si_endtime is None %}
+  <article class="message is-success">
+    <div class="message-header">
+      <p>{{scholar.si_name}}</p>
+      <i class="far fa-newspaper"></i>
+    </div>
+    <div class="message-body">
+      <div class="hover01 column">
+        <div>
+          <figure> <a href="/secondAppilcationAdmin/{{scholar.id}}"> <img src="{{scholar.si_photo_bg.url}}" alt="" /> </a> </figure>
+        </div>
+        <div>
+    </div>
+  </article>
+
+
+
+{% endif %}
+{%endfor%}
+  <!--page-->
+
+  <div class="level-item has-text-centered">
+    <nav class="pagination" role="navigation" aria-label="pagination">
+      <ul class="pagination-list">
+        {%if scholars.paginator.num_pages > 1 %}
+        {% for pagenumber in scholars.paginator.page_range %}
+        <li>
+          <a class="pagination-link 
+          
+          
+          {% if scholars.number == pagenumber %}
+          is-current 
+    
+          {% endif %}
+    
+    
+          " aria-label="Goto page 1" href="?page={{pagenumber}}">{{pagenumber}}</a>
+        </li>
+        {% endfor %}
+        {%endif%}
+     
+      </ul>
+    </nav>
+    </div>
+    <!-- end page -->
+
+{% endblock %}

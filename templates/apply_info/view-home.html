@@ -1,0 +1,129 @@
+{% extends 'Menubar-Template.html' %} 
+{% load static %}
+{% block content %}
+
+{% for scholar in scholars %}
+
+<style>
+  @media only screen and (max-width: 800px) {
+ 
+    .message-body {
+      font-size:1px;
+    }
+    
+  }
+  </style>
+
+<script>
+    function call(info_id){
+  
+      Swal.fire({
+        "title":"ต้องการสมัครทุนนี้ใช่หรือไม่ ?  ",
+        "icon":"question",
+        "showCancelButton":true,
+        "cancelButtonText":"ย้อนกลับ",
+        "confirmButtonText":"สมัครทุน"
+      })
+      .then(function (result){
+        if (result.isConfirmed){
+          window.location.href="/checkInfo/"+info_id
+        }
+      })
+  
+    }
+
+  function del(info_id,user_id){
+  
+  Swal.fire({
+    "title":"ต้องการที่จะลบใบสมัครใช่หรือไม่ ?  ",
+    "icon":"question",
+    "showCancelButton":true,
+    "cancelButtonText":"ย้อนกลับ",
+    "confirmButtonText":"ใช่,ลบใบสมัคร"
+  })
+  .then(function (result){
+    if (result.isConfirmed){
+      window.location.href="/delApp/"+info_id+'/'+user_id
+    }
+  })
+
+}
+
+    
+
+</script>
+
+<article class="message is-success">
+ 
+<div class="message-header">
+    
+    <p>ชื่อ: {{scholar.si_name}}</p>
+    <a href = "/home"><button   class="delete" aria-label="delete"></button></a>
+  </div>
+  <br>
+
+
+<div class="message-body">
+        <img src="{{scholar.si_photo_bg.url}}"><br>
+        <h2 align="left">
+
+          <article class="message is-link">
+            <div class="message-header">
+              <p >เนื้อหา</p>
+              
+            </div>
+            <div class ="message-detail">
+            {{scholar.si_description|safe }}
+            </div>
+              <div class="box">
+              <p class="subtitle is-4"> <b><font  color="red" >หมายเหตุ {{scholar.si_note}}</font> </b></p>
+              
+              <p class="subtitle is-4"> จำนวนทุนที่ได้รับ: {{scholar.si_individual_amount}}  บาท </p>
+              <p class="subtitle is-4"> ที่มาของทุน: {{scholar.si_source}}  </p>
+              <p class="subtitle is-4"> <b>สิ้นสุดวันรับสมัคร: {{scholar.si_expire_time}} </b></p>
+         
+            <p class="subtitle is-4" >ผู้มอบทุน {{scholar.si_source_name}}</p>
+          
+          
+          <br>
+        </div>
+
+
+        {%if scholar.si_path_to_pdf%}
+        <div class="box">
+          
+        <br><a href="{{scholar.si_path_to_pdf.url}}"> <button class="button is-danger is-medium is-rounded is-fullwidth "><i class="fas fa-file-pdf"> <p> เอกสารทางการ </p> </i> </button></a><br>
+        
+        </div>
+        {%endif%}
+            </div>
+          </article>
+        
+        
+
+
+        
+  
+        </h2>
+        {%if user.is_superuser == False%}
+        {%if status_homeid == 0 %}
+        {% if check %}
+        <button class="button is-success is-medium is-rounded is-fullwidth" onclick="call({{scholar.id}})"> <p>สมัครทุน</p> </i> </button>
+        {% else %}
+        <a href = "/checkInfo/{{scholar.id}}"><button class="button is-warning is-medium is-rounded is-fullwidth" onclick=""> <p> แก้ไขข้อมูลสมัครทุน </p> </i> </button></a>
+        <br>
+        <button class="button is-danger is-medium is-rounded is-fullwidth" onclick="del({{scholar.id}},{{request.user.id}})"> <p> <i class="fa-solid fa-trash"></i> ลบใบสมัครทุน </p> </i> </button>
+        {% endif %}
+        {%elif status_homeid == 1%}
+        <button class="button is-info is-medium is-rounded is-fullwidth is-warning"> <p>กำลังดำเนินการรับทุน </p></i> </button>
+        {%endif%}
+        {%else%}
+        <a href="/editScholar/{{scholar.id}}"><button class="button is-info is-medium is-rounded is-fullwidth is-warning"> <p>แก้ไขทุน </p></i> </button></a>
+        {%endif%}
+    <h2>
+</div>
+</article>
+
+{% endfor %}
+
+{% endblock %}

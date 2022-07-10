@@ -1,0 +1,671 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@200&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: 'Prompt', sans-serif;
+  }
+  
+  body {
+    background: #fff;
+  }
+  
+  .wrapper .header {
+    z-index: 2;
+    background: #6b0d1d;
+    position: fixed;
+    width: calc(100% - 0%);
+    height: 50px;
+    display: flex;
+    top: 0;
+  }
+  
+  .wrapper .header .header-menu {
+    width: calc(100% - 0%);
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+  }
+  
+  .wrapper .header li {
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+  }
+  
+  .wrapper .header .header-menu .title {
+    color: #fff;
+    font-size: 25px;
+    text-transform: uppercase;
+    font-weight: 900;
+  }
+  
+  .wrapper .header .header-menu .title img {
+    width: 5%;
+  }
+  
+  .wrapper .header .header-menu .title span {
+    color: #37ab00;
+    padding: 20px;
+  }
+  
+  .wrapper .header .header-menu .sidebar-btn {
+    color: #fff;
+    position: absolute;
+    margin-left: 240px;
+    font-size: 22px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: 0.3s;
+    transition-property: color;
+  }
+  
+  .wrapper .header .header-menu .sidebar-btn:hover {
+    color: #cd0000;
+  }
+  
+  .wrapper .header .header-menu ul {
+    display: flex;
+  }
+  
+  .wrapper .header .header-menu ul li a {
+    background: #fff;
+    color: #000;
+    display: block;
+    margin: 0 10px;
+    font-size: 18px;
+    width: 34px;
+    height: 34px;
+    line-height: 35px;
+    text-align: center;
+    border-radius: 50%;
+    transition: 0.3s;
+    transition-property: background, color;
+  }
+  
+  .wrapper .header .header-menu ul li a:hover {
+    background: #cd0000;
+    color: #fff;
+  }
+  
+  .wrapper .sidebar {
+    z-index: 1;
+    background: #852b3a;
+    position: fixed;
+    top: 50px;
+    width: 250px;
+    height: 100%;
+    transition: 0.3s;
+    transition-property: width;
+    overflow-y: auto;
+  }
+  
+  .wrapper .sidebar .sidebar-menu {
+    overflow: hidden;
+    padding-bottom: 75px;
+    cursor: pointer;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .profile img {
+    margin: 20px 0;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .profile p {
+    color: #bbb;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .profile h2 {
+    color: yellow;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item {
+    width: 250px;
+    overflow: hidden;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item .menu-btn {
+    display: block;
+    color: #fff;
+    position: relative;
+    padding: 20px 20px;
+    transition: 0.3s;
+    transition-property: color;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item .menu-btn:hover {
+    background-color: #cd0000;
+    transition: 0.3s;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item .menu-btn i {
+    margin-right: 20px;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item .menu-btn .drop-down {
+    float: right;
+    font-size: 12px;
+    margin-top: 3px;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item .sub-menu {
+    background: #5c1818b6;
+    overflow: hidden;
+    max-height: 0;
+    transition: 0.3s;
+    transition-property: background, max-height;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item .sub-menu a {
+    display: block;
+    position: relative;
+    color: #fff;
+    white-space: nowrap;
+    font-size: 15px;
+    padding: 15px;
+    transition: 0.3s;
+    transition-property: background;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item .sub-menu a:hover {
+    background: #cd0000;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item .sub-menu a:not(last-child) {
+    border-bottom: 5px solid #000000cb;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item .sub-menu i {
+    padding-right: 20px;
+    font-size: 10px;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item:target .sub-menu {
+    max-height: 500px;
+  }
+  
+  .wrapper .main-container {
+    width: (100% - 250px);
+    margin-top: 70px;
+    margin-left: 250px;
+    padding: 15px;
+    background-size: cover;
+    height: 100vh;
+    transition: 0.3s;
+  }
+  
+  .wrapper .main-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .wrapper.collapse .sidebar {
+    width: 70px;
+  }
+  
+  .wrapper.collapse .sidebar .profile img,
+  .wrapper.collapse .sidebar .profile p,
+  .wrapper.collapse .sidebar .profile h2,
+  .wrapper.collapse .sidebar span,
+  .wrapper.collapse .sidebar a span {
+    display: none;
+  }
+  
+  .wrapper.collapse .sidebar .sidebar-menu .item .menu-btn {
+    font-size: 23px;
+  }
+  
+  .wrapper.collapse .sidebar .sidebar-menu .item .menu-btn {
+    font-size: 23px;
+  }
+  
+  .wrapper.collapse .sidebar .sidebar-menu .item .sub-menu i {
+    font-size: 18px;
+    padding-left: 3px;
+  }
+  
+  .wrapper.collapse .main-container {
+    width: calc(100% - 70px);
+    margin-left: 70px;
+  }
+  
+  .wrapper .main-container .cardforStatus {
+    background: rgb(140, 140, 140);
+    padding: 15px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    width: 100%;
+    height: 620px;
+  }
+
+  .contact-box {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 19px 5px rgba(0, 0, 0, 0.19);
+  }
+  
+  textarea {
+    height: 400px;
+  }
+  
+  .center {
+    margin: auto;
+    padding: 50px;
+  }
+  
+  .center h2 {
+    padding-bottom: 20px;
+    font-size: large;
+    font-weight: bold;
+  }
+  
+  .field {
+    width: 100%;
+    border: 2px solid rgba(0, 0, 0, 0);
+    outline: none;
+    background-color: rgba(230, 230, 230, 0.6);
+    padding: 0.5rem 1rem;
+    font-size: 1.1rem;
+    margin-bottom: 22px;
+    transition: 0.3s;
+  }
+  
+  .field:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  textarea {
+    min-height: 150px;
+  }
+  
+  .file {
+    padding: 50px 0px;
+  }
+  
+  .btn {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    background-color: #2ecc71;
+    color: #fff;
+    font-size: 1.1rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .btn:hover {
+    background-color: #27ae60;
+  }
+  
+  .field:focus {
+    border: 2px solid rgba(30, 85, 250, 0.47);
+    background-color: #fff;
+  }
+
+  a, u {
+    text-decoration: none !important;
+    
+  }
+  
+  .add-button {
+    background-color: hsl(348, 100%, 61%);
+    color: #fff;
+    padding: 2em 2em;
+    height: 1em; width: 1em;
+    border-radius: 100%;
+    position: fixed;
+    bottom: 1rem;
+    right: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+ 
+  }
+  .add-button a{
+    text-decoration: none !important;
+  }
+  .add-button, .add-button__icon {
+    transition: all 0.5s ease-in-out;
+ 
+  }
+  
+  .add-button:hover {
+    transform: scale(0.9);
+    box-shadow: 0px 0px 0px 2px #ffff, 0px 0px 0px 12px hsl(348, 100%, 61%);
+    cursor: pointer;
+    text-decoration: none !important;
+  }
+  
+  .add-button:hover .add-button__icon {
+    transform:scale(1.5);
+    
+  }
+
+
+
+  .hover01 figure img {
+    -webkit-transform: scale(.9);
+    transform: scale(.9);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+  }
+  .hover01 figure:hover img {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  
+  
+
+  .wrapper .main-container .cardforStatus .progessConatainer {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+  }
+  
+  .wrapper .main-container .cardforStatus .progessConatainer .progessBar {
+    background-color: rgb(140, 140, 140);
+    width: 100%;
+    height: 2%;
+    margin-top: 20px;
+  }
+  
+  .wrapper .main-container .cardforStatus .progessConatainer .progessBar li {
+    list-style-type: none;
+    float: left;
+    width: 25%;
+    position: relative;
+    text-align: center;
+    font-size: 30px;
+    padding-top: 100px;
+  }
+  
+  .wrapper .main-container .cardforStatus .progessConatainer .progessBar li:before {
+    content: "";
+  
+    width: 60px;
+    height: 60px;
+    line-height: 50px;
+    border: 30px solid #ddd;
+    display: block;
+    text-align: center;
+    margin: 0 auto 10px auto;
+    border-radius: 50%;
+  }
+  
+  .wrapper .main-container .cardforStatus .progessConatainer .progressionInfomantHeader {
+    margin-left: 50px;
+    padding-top: 50px;
+    font-size: 50px;
+    font-weight: bold;
+  }
+  
+  .wrapper .main-container .cardforStatus .progessConatainer .progressionInfomantName {
+    margin-left: 50px;
+    padding-top: 30px;
+    font-size: 40px;
+  }
+  
+  .wrapper .main-container .cardforStatus .progessConatainer .progressionInfomantDate {
+    margin-left: 50px;
+    padding-top: 30px;
+    font-size: 30px;
+  }
+  
+  .wrapper .main-container .cardforStatus .progessConatainer .progressionInfomantStatus {
+    margin-left: 50px;
+    padding-top: 30px;
+    font-size: 20px;
+  }
+  .wrapper .main-container .cardforStatus .progessConatainer .progessBar li.active {
+    color: rgb(2, 150, 19);
+  }
+  
+  .wrapper .main-container .cardforStatus .progessConatainer .progessBar li.active:before {
+    border-color: rgb(2, 150, 19);
+  }
+  
+  .wrapper .main-container .cardforStatus .progessConatainer .progessBar li.inactive {
+    color: rgb(201, 4, 4);
+  }
+  
+  .wrapper
+    .main-container
+    .cardforStatus
+    .progessConatainer
+    .progessBar
+    li.inactive:before {
+    border-color: rgb(201, 4, 4);
+  }
+  
+  .wrapper .main-container .cardforStatus .progessConatainer .progessBar li.inprogess {
+    color: rgb(248, 149, 0);
+  }
+  
+  .wrapper
+    .main-container
+    .cardforStatus
+    .progessConatainer
+    .progessBar
+    li.inprogess:before {
+    border-color: rgb(248, 149, 0);
+  }
+  
+  
+@media only screen and (max-width: 800px) {
+  .wrapper .sidebar {
+  z-index: 2;
+  background: #852b3a;
+  position: fixed;
+  top: 50px;
+  width: 100%;
+  height: 100%;
+  transition: 0.3s;
+  transition-property: width;
+  overflow-y: auto;
+}
+
+.wrapper .sidebar .sidebar-menu {
+  overflow: hidden;
+  padding-bottom: 75px;
+  cursor: pointer;
+}
+
+.wrapper .sidebar .sidebar-menu .profile img {
+  margin: 20px 0;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.wrapper .sidebar .sidebar-menu .item .sub-menu a {
+  display: block;
+  position: relative;
+  color: #fff;
+  white-space: nowrap;
+  font-size: 15px;
+  padding: 10px;
+  transition: 0.3s;
+  transition-property: background;
+}
+.wrapper .sidebar .sidebar-menu .item .menu-btn .drop-down {
+  float: right;
+  font-size: 5px;
+  margin-top: 3px;
+}
+.wrapper .sidebar .sidebar-menu .item {
+  width: 100%;
+  overflow: hidden;font-size: 5px;
+  font-size: 15px;
+}
+
+
+.wrapper .main-container {
+  width: (100% - 250px);
+  margin-top: 70px;
+  margin-left: 150px;
+  padding: 15px;
+  background: url(background.jpg) no-repeat;
+  background-size: cover;
+  height: 100vh;
+  transition: 0.3s;
+}
+
+.wrapper .main-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.wrapper .main-container .card {
+  
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  width: 100%;
+  height : 100vh;
+}
+.wrapper .main-container .cardforStatus {
+  background: rgb(140, 140, 140);
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  width: 100%;
+  height: 400px;
+}
+.wrapper .sidebar .sidebar-menu .item .menu-btn:hover {
+  background-color: #cd0000;
+  transition: 0.3s;
+  /*width: 100;*/
+}
+
+.wrapper .header .header-menu ul li a:hover {
+  background: #cd0000;
+  color: #fff;
+  
+}
+ 
+
+  .wrapper .main-container .cardforStatus .progessConatainer {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+  }
+  
+  .wrapper .main-container .cardforStatus .progessConatainer .progessBar {
+    background-color: rgb(140, 140, 140);
+    width: 100%;
+    height: 2%;
+    margin-top: 20px;
+    
+  }
+  
+  .wrapper .main-container .cardforStatus .progessConatainer .progessBar li {
+    list-style-type: none;
+    float: left;
+    width: 25%;
+    height: 25%;
+    position: relative;
+    text-align: center;
+    font-size: 10px;
+    padding-top: 10px;
+  }
+  
+  .wrapper .main-container .cardforStatus .progessConatainer .progessBar li:before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border: 20px solid #ddd;
+    display: block;
+    text-align: center;
+    margin: 0 auto 10px auto;
+    border-radius: 50%;
+    margin-top: 20px;
+  }
+  
+  .wrapper .main-container .cardforStatus .progessConatainer .progressionInfomantHeader {
+    margin-right:auto;
+    margin-left: auto;
+    padding-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .wrapper .main-container .cardforStatus .progessConatainer .progressionInfomantName {
+     margin-left: 50px;
+    padding-top: 30px;
+    font-size: 10px
+  }
+  
+  .wrapper .main-container .cardforStatus .progessConatainer .progressionInfomantDate {
+    margin-left: auto;
+    margin-right:auto;
+    padding-top: 15px;
+    font-size: 10px;
+  }
+  
+  .wrapper .main-container .cardforStatus .progessConatainer .progressionInfomantStatus {
+    margin-right:auto;
+    margin-left: auto;
+    padding-top: 20px;
+    font-size: 18px;
+  }
+ 
+  
+
+
+}
+
+@media only screen and (max-height: 1000px) {
+  .wrapper .main-container .card {
+     
+    padding: 15px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    width: 100%;
+    height:auto;
+  }
+}
+
+@media only screen and (max-height: 900px) {
+  .wrapper .main-container .card {
+    
+    padding: 15px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    width: 100%;
+    height: 70%;
+  }
+}
+
+@media only screen and (max-height: 700px) {
+  .wrapper .main-container .card {
+    
+    padding: 15px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    width: 100%;
+    height: 65%;
+  }
+}
+
+.message-detail{
+  background-color: #fff;
+  padding: 10%;
+  margin-bottom: 2%;
+}
+

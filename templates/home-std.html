@@ -1,0 +1,123 @@
+{% extends 'Menubar-Template.html' %} 
+{% load static %}
+{% block content %}
+<form action="home" method="POST" >
+  {% csrf_token %}
+<div class="field">
+  <label class="label">ค้นหา</label>
+  <div class="control has-icons-left has-icons-right">
+    <input class="input is-success" name = "findInfo" id="findInfo" type="text" placeholder="ชื่อทุน">
+    <span class="icon is-small is-left">
+      <i class="fa-solid fa-magnifying-glass"></i></i>
+    </span>
+  </div>
+  <p class="help is-success">ไม่จำเป็นต้องค้นหาเป็นคำ</p>
+</div>
+</form>
+
+{% for scholar in scholars %}
+
+
+  
+  <article class="message is-success">
+    <div class="message-header">
+      <p>
+        <a href="/viewHome/{{scholar.id}}/{{request.user.id}}">{{scholar.si_name}}
+      </p>
+      <i class="far fa-newspaper"></i>
+    </div>
+    <div class="message-body">
+      <a href="/viewHome/{{scholar.id}}/{{request.user.id}}">
+      <div class="hover01 column">
+        <div>
+          {%if scholar.si_photo_bg%}
+          <figure> <a href="/viewHome/{{scholar.id}}/{{request.user.id}}"> <img src="{{scholar.si_photo_bg.url}}" alt="" /> </a> </figure>
+          {%endif%}
+        </div>
+        <div>
+     
+    </div>
+    {% if user.is_superuser %}
+    <a href = "/editScholar/{{scholar.id}}">
+    <button class="button is-warning">
+      <span class="icon is-small">
+        <i class="fas fa-edit"></i>
+      </span>
+      <span>แก้ไข</span>
+    </button>
+    </a>
+
+      <button class="button is-danger" onclick="del({{scholar.id}})">
+        <span class="icon is-small">
+          <i class="fa-solid fa-trash"></i>
+        </span>
+        <span>ลบทุน</span>
+      </button>
+    {%endif%}
+
+
+    
+    
+  </article>
+
+    
+
+{%endfor%}
+
+{% if user.is_superuser %}
+<a href="/CreateScholar">
+<div class="add-button">
+  <i class="fa fa-2x fa-plus add-button__icon"></i>
+</div>
+</a>
+{%endif%}
+
+<!--page-->
+
+<div class="level-item has-text-centered">
+<nav class="pagination" role="navigation" aria-label="pagination">
+  <ul class="pagination-list">
+    {%if scholars.paginator.num_pages > 1 %}
+    {% for pagenumber in scholars.paginator.page_range %}
+    <li>
+      <a class="pagination-link 
+      
+      
+      {% if scholars.number == pagenumber %}
+      is-current 
+
+      {% endif %}
+
+
+      " aria-label="Goto page 1" href="?page={{pagenumber}}">{{pagenumber}}</a>
+    </li>
+    {% endfor %}
+    {%endif%}
+ 
+  </ul>
+</nav>
+</div>
+<!-- end page -->
+
+
+<script>
+function del(info_id){
+  
+  Swal.fire({
+    "title":"ต้องการที่จะลบทุนใช่หรือไม่ ?  ",
+    "icon":"question",
+    "showCancelButton":true,
+    "cancelButtonText":"ย้อนกลับ",
+    "confirmButtonText":"ใช่,ลบทุน"
+  })
+  .then(function (result){
+    if (result.isConfirmed){
+      window.location.href="/removeScholar/"+info_id
+    }
+  })
+
+}
+</script>
+
+
+{% endblock %}

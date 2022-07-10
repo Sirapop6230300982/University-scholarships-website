@@ -1,0 +1,135 @@
+{% extends 'Menubar-Template.html' %} 
+{% load static %}
+{% block content %}
+<form action="InformationHome" method="POST" >
+  {% csrf_token %}
+<div class="field">
+  <label class="label">ค้นหา</label>
+  <div class="control has-icons-left has-icons-right">
+    <input class="input is-success" name = "findnews" id="findnews" type="text" placeholder="ชื่อข่าวประชาสัมพันธ์">
+    <span class="icon is-small is-left">
+      <i class="fa-solid fa-magnifying-glass"></i></i>
+    </span>
+  </div>
+  <p class="help is-success">ไม่จำเป็นต้องค้นหาเป็นคำ</p>
+</div>
+</form>
+
+        <!-- <h2>{{new.sn_header}} <br>
+          {{new.sn_description}}<br>
+          {% if new.sn_photo_bg or new.sn_path_to_pdf %}
+            <a href="/viewInfomation/{{new.id}}">รายละเอียดเพิ่มเติม</a> 
+          {% endif %}
+          {%if user.is_superuser%}
+          <a href="/editInfomation/{{new.id}}"> <i class="fas fa-edit"></i> </a>
+          {%endif%}
+        </h2> -->
+        {% for new in info %}
+        {% if new.sn_status == 0 %}
+        <div class="list">
+          <div class="list-item box">
+            <div class="list-item-image">
+              <figure class="image is-64x64">
+                {% if new.sn_photo_bg %}
+                <img class="is-rounded" src="{{new.sn_photo_bg.url}}">
+                {%else%}
+                <img class="is-rounded" src="https://via.placeholder.com/128x128.png?text=Image">
+                {%endif%}
+              </figure>
+            </div>
+            <div class="list-item-content">
+              <div class="list-item-title"><h1 class="title">{{new.sn_header}}</h1></div>
+              <br>
+             
+              <br>
+              {% if new.sn_photo_bg or new.sn_path_to_pdf %}
+              <a href="/viewInfomation/{{new.id}}"> <button class="button is-primary is-light"><p>รายละเอียดเพิ่มเติม</button></p> </a> 
+              {% endif %}
+
+              {%if user.is_superuser%}
+              <div class="list-item-controls">
+                <div class="buttons is-right">
+                  <a href="/editInfomation/{{new.id}}">
+                  <button class="button">
+                    <span class="icon is-small">
+                      <i class="fas fa-edit"></i>
+                    </span>
+                    <span>Edit</span>
+                  </button>
+                </a>
+                  
+                  <button class="button is-danger is-light" onclick="del({{new.id}})">
+                    <span class="icon is-small">
+                      <i class="fa-solid fa-trash"></i>
+                    </span>
+                    <span>ลบประกาศนี้</span>
+                  </button>
+                
+              </div>
+
+
+
+              {%endif%}
+            </div>
+          </div>
+        </div>
+         
+          
+            
+          {%endif%}
+          
+        
+        {%endfor%}
+       
+        <a href="/information">
+        <div class="add-button">
+         <i class="fa fa-2x fa-plus add-button__icon"></i>
+          </div>
+        </a>
+<!--page-->
+
+<div class="level-item has-text-centered">
+  <nav class="pagination" role="navigation" aria-label="pagination">
+    <ul class="pagination-list">
+      {%if info.paginator.num_pages > 1 %}
+      {% for pagenumber in info.paginator.page_range %}
+      <li>
+        <a class="pagination-link 
+        
+        
+        {% if info.number == pagenumber %}
+        is-current 
+  
+        {% endif %}
+  
+  
+        " aria-label="Goto page 1" href="?page={{pagenumber}}">{{pagenumber}}</a>
+      </li>
+      {% endfor %}
+      {%endif%}
+   
+    </ul>
+  </nav>
+  </div>
+  <!-- end page -->
+
+  <script>
+    function del(info_id){
+      
+      Swal.fire({
+        "title":"ต้องการที่จะลบข่าวสารใช่หรือไม่ ?  ",
+        "icon":"question",
+        "showCancelButton":true,
+        "cancelButtonText":"ย้อนกลับ",
+        "confirmButtonText":"ใช่,ลบช่าวสาร"
+      })
+      .then(function (result){
+        if (result.isConfirmed){
+          window.location.href="/removeInformation/"+info_id
+        }
+      })
+    
+    }
+    </script>
+    
+{% endblock %}

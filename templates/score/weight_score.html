@@ -1,0 +1,151 @@
+{% extends 'Menubar-Template.html' %} 
+{% block content %}
+
+{% for infoo in info %}
+
+
+<h1 class="title is-4" >{{infoo.si_name}} </h1>
+
+<form method="POST" action="/scholarWeightScore/{{info2}}">
+  {% csrf_token %}
+  {% if info.status == False%}
+  <div class="columns is-centered fieldGroup">
+  
+    <div class="columns">
+      
+      <div class="column">
+        <label class="label">หัวข้อ</label>
+        <input type="text" name="name[]" class="input" placeholder="หัวข้อ"/>
+      </div> 
+      
+      <div class="column"> 
+        <label class="label">น้ำหนักคะแนน</label>
+        <input type="text" name="weight[]" class="input" placeholder="น้ำหนักคะแนน"/>
+      </div> 
+    </div>
+  </div>
+  <div class="column"> 
+    <!--<a href="javascript:void(0)" class="button is-success addMore"><i class="fas fa-plus"></i></a>-->
+    <a href="javascript:void(0)" class="button is-success addMore">เพิ่มหัวข้อ</a>
+  </div>
+  <input type="submit" value="ยืนยัน" class="button is-primary">
+  
+</form>
+
+<!-- copy of input fields group -->
+
+<div class="columns fieldGroupCopy" style="display: none;">
+  
+  <div class="columns">
+      
+    <div class="column"> 
+      <label class="label">หัวข้อ</label>
+      <input type="text" name="name[]" class="input" placeholder="หัวข้อ"/>
+    </div> 
+    
+    <div class="column"> 
+      <label class="label">น้ำหนักคะแนน</label>
+      <input type="text" name="weight[]" class="input" placeholder="น้ำหนักคะแนน"/>
+    </div>
+
+    <div class="column"> 
+      <a href="javascript:void(0)" class="button is-danger remove"><i class="fas fa-times"></i></a>
+    </div>
+
+  </div>
+  
+</div>
+
+
+{%else%}
+{% for key1,value1 in json.items %}
+  
+<div class="columns is-centered fieldGroup">
+  
+  <div class="columns">
+    
+    <div class="column"> 
+      <label class="label">หัวข้อ</label>
+      <input type="text" name="name[]" class="input" value="{{ key1 }}"/>
+    </div> 
+    
+    <div class="column"> 
+      <label class="label">น้ำหนักคะแนน</label>
+      <input type="text" name="weight[]" class="input" value = "{{ value1 }}"/>
+    </div> 
+
+    <div class="column"> 
+      <a href="javascript:void(0)" class="button is-danger remove"><i class="fas fa-times"></i></a>
+    </div>
+
+  </div>
+  
+  
+  
+</div>
+{%endfor%}
+<div class="column">
+  <!--<a href="javascript:void(0)" class="button is-success addMore"><i class="fas fa-plus"></i></a>-->
+  <a href="javascript:void(0)" class="button is-success addMore">เพิ่มหัวข้อ</a>
+  <input type="submit" value="ยืนยัน" class="button is-primary">
+</div>
+
+</form>
+
+{%endif%}
+{% endfor %}
+<!-- copy of input fields group -->
+
+<div class="columns fieldGroupCopy" style="display: none;">
+  
+  <div class="columns">
+      
+    <div class="column"> 
+      <label class="label">หัวข้อ</label>
+      <input type="text" name="name[]" class="input" placeholder="หัวข้อ"/>
+    </div> 
+    
+    <div class="column"> 
+      <label class="label">น้ำหนักคะแนน</label>
+      <input type="text" name="weight[]" class="input" placeholder="น้ำหนักคะแนน"/>
+    </div> 
+      
+    <div class="column"> 
+      <a href="javascript:void(0)" class="button is-danger remove"><i class="fas fa-times"></i></a>
+    </div>
+      
+  </div>
+  
+</div>
+
+
+
+<script>
+  $(document).ready(function(){
+    //group add limit
+    var maxGroup = 10;
+    
+    //add more fields group
+    $(".addMore").click(function(){
+      if($('body').find('.fieldGroup').length < maxGroup){
+        var fieldHTML = '<div class="columns is-centered fieldGroup">'+$(".fieldGroupCopy").html()+'</div>';
+        $('body').find('.fieldGroup:last').after(fieldHTML);
+      }else{
+        alert('Maximum '+maxGroup+' groups are allowed.');
+      }
+    });
+    
+    //remove fields group
+    $("body").on("click",".remove",function(){
+        if($('body').find('.fieldGroup').length > 1){
+            $(this).parents(".fieldGroup").remove();
+        }
+        else{
+            alert('You must have one or more header. (current header : ' + $('body').find('.fieldGroup').length + ')');
+        }
+    });
+
+  });
+</script>
+
+{% endblock %}

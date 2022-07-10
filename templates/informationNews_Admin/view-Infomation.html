@@ -1,0 +1,37 @@
+{% extends 'Menubar-Template.html' %} 
+{% load static %}
+{% block content %}
+
+
+<!-- sn_header = models.CharField(max_length=256)
+sn_description = models.TextField() #text
+sn_expire_date = models.DateField() #วันที่
+sn_photo_bg = models.ImageField(upload_to='uploads/') #photo
+sn_path_to_pdf = models.FileField(upload_to='documents/') #pdf -->
+
+{% for new in news %}
+<br>
+<h1 class="title">{{new.sn_header}}</h1>
+
+<div class="box">
+    {{new.sn_description | safe}}
+</div>
+<span class="tag is-info is-medium">จะหมดอายุใน : {{new.sn_expire_date}}</span> 
+<br>
+<br>
+
+
+{% if new.sn_photo_bg %}
+<img src="{{new.sn_photo_bg.url}}">
+{%else%}
+<p></p>
+{%endif%}
+<div class="box">{% if new.sn_path_to_pdf %}<a href="{{new.sn_path_to_pdf.url}}"> <button class="button is-primary is-medium is-fullwidth"><i class="fas fa-file-pdf">  Download เอกสารทางการ </i> </button></a></div>
+
+{%else%}
+<p></p>
+{%endif%}
+
+{% endfor %}
+
+{% endblock %}

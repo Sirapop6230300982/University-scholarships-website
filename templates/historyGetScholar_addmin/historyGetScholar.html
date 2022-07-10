@@ -1,0 +1,166 @@
+{% extends 'Menubar-Template.html' %} 
+{% load static %}
+{% block content %}
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar Dashboard Template With Sub Menu</title>
+    <link rel="stylesheet" href="{% static 'css/historyGetScholar.css' %}?{% now "U" %}" />
+    <link
+
+    
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css"
+    />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+      charset="utf-8"
+    ></script>
+  </head>
+  <body>
+    
+    <form action="historyGetScholar" method="POST" >
+      {% csrf_token %}
+      <!-- <form action="historyGetScholarFind" method="get" > -->
+        <div class="center2">
+            <h2 align="left" class="resizedTextbox" >ประวัติรายชื่อผู้ได้รับทุน</h2>
+    <br>
+    </br>
+    <li align="left"><b><font face="Arial" class="movehead" >รหัสนิสิต 
+        <input type="text" class="Textbox2" name="studentID" value="{{studentID}}"></font></b>
+    <b><font face="Arial" class="movehead" >ผู้ให้ทุน 
+        <input type="text" class="Textbox2" name="ScholarProvider" value="{{ScholarProvider}}"></font></b>
+    <b><font face="Arial" class="movehead" >ประเภททุน</font></b>
+    <div class="select" name ="title-thai">
+    <select name="scholarType">
+        <option value = "กรุณาเลือก" >กรุณาเลือก</option>
+        <option value="{{scholarType}}" selected="selected" hidden="hidden">{{scholarType}}</option>
+        <option value = "ทุนภายใน" >ทุนภายใน</option>
+        <option value = "ทุนภายนอก" >ทุนภายนอก</option>
+        <option value = "ทุนภายผสม" >ทุนผสม</option>
+    </select>
+    </div>
+
+
+    <li align="left">
+      <b><font face="Arial" class="movehead" >ชื่อทุน</font></b>
+    <div class="select" name ="title-thai">
+    <select name="scholarName">
+        <option value = "กรุณาเลือก" >กรุณาเลือก</option>
+        <option value="{{scholarName}}" selected="selected" hidden="hidden">{{scholarName}}</option>
+        {% for info in infoes %}
+        <option value = "{{info.si_name}}" >{{info.si_name}}</option>
+        {% endfor %}
+    </select>
+    </div>
+    
+
+    <b><font face="Arial" class="movehead" >ปีการศึกษา</font></b>
+    <div class="select" name ="title-thai">
+        <select name="year">
+        <option value = "กรุณาเลือก" >กรุณาเลือก</option>
+        <option value="{{yearGet}}" selected="selected" hidden="hidden">{{yearGet}}</option>
+        {% for y in year %}
+        <option value = "{{y}}" >{{y}}</option>
+        {% endfor %}
+        </select>
+    </div>
+   
+  
+    <button class="button"><i class="fa fa-search"></i></button>
+    <div class = "boxmoney"
+          <h2 align="center"><b>ยอดเงินรวมทั้งสิ้น {{money}} บาท</b></h2>
+    </div>
+  </form>
+    
+    <!-- <form class="example" action="historyGetScholar" method="POST" enctype="multipart/form-data" style="margin:auto;max-width:300px"> -->
+    <!-- </form> -->
+    </li>
+    <br>
+    </br>
+    {% for his in history %}
+    <div class="resizedTextbox3">
+       <form>
+        <li align="left"><b><font face="Arial" class="movehead2">ปีการศึกษา {{his.0.si_year}}</font></b>
+        <b><font face="Arial" class="movehead2">{{his.0.si_name}}</font></b>
+        <b><font face="Arial" class="movehead2">มูลค่าทุน</font></b>
+        <b><font face="Arial" class="movehead2">{{his.0.si_individual_amount}}</font></b>
+        <b><font face="arial" class="movehead2">บาท / คน</font></b>
+        </li>
+        </form>
+        <br>
+        </br>
+
+        <div class="bodytable">
+        <table>
+            <thead>
+                <th >รหัสนิสิต</th>
+                <th >ชื่อ-นามสกุล</th>
+                <th >สถานะ</th>
+            </thead>
+            <tbody>
+        {% for h in his.1 %}
+            <tr>
+              <td >{{h.sa_std_code}}</td>
+              <td >{{h.sa_title_th}}{{h.sa_firstname_th}}   {{h.sa_lastname_th}}</td>
+              <td ><b><button>ได้รับทุน</button></b></td>
+            </tr>
+        {%endfor%}       
+        </table>  
+        <br>
+        </br>
+        </div>
+        {%endfor%}  
+        <br>
+        </br>
+      </div>
+      
+          </div>
+        </div>
+    
+     
+      </div>
+      </div>
+
+      
+<!--
+<script type="text/javascript">
+$(document).ready(function () {
+$(".sidebar-btn").click(function () {
+$(".wrapper").toggleClass("collapse");
+});
+});
+</script>-->
+
+<!--page-->
+
+<div class="level-item has-text-centered">
+  <nav class="pagination" role="navigation" aria-label="pagination">
+    <ul class="pagination-list">
+      {%if history.paginator.num_pages > 1 %}
+      {% for pagenumber in history.paginator.page_range %}
+      <li>
+        <a class="pagination-link 
+        
+        
+        {% if history.number == pagenumber %}
+        is-current 
+  
+        {% endif %}
+  
+  
+        " aria-label="Goto page 1" href="?page={{pagenumber}}">{{pagenumber}}</a>
+      </li>
+      {% endfor %}
+      {%endif%}
+   
+    </ul>
+  </nav>
+  </div>
+  <!-- end page -->
+</body>
+{% endblock %}

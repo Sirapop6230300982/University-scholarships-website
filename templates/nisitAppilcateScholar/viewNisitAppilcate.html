@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sidebar Dashboard Template With Sub Menu</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+      charset="utf-8"
+    ></script>
+  </head>
+  <body>
+    <!--เริ่มการคลุม-->
+    <div class="wrapper">
+      <!--เริ่มส่วนของ Header-->
+      <div class="header">
+        <div class="header-menu">
+          <div class="title"></i><span style=></span></div>
+        <div class="sidebar-btn">
+           
+          </div>
+
+          <ul>
+            <li>ข่าวสาร | นิสิต</li>
+          </ul>
+        </div>
+      </div>
+      <!--จบส่วนของ Header-->
+      <!--เมนูด้านข้างเริ่มที่นี่-->
+      <div class="sidebar">
+        <div class="sidebar-menu">
+          <div class="sidebar-btn">
+            <li class="item">
+              <div class="menu-btn">
+                <i class="fas fa-bars"></i><span>MENU</span>
+              </div>
+            </li>
+          </div>
+          <center class="profile">
+            <img src="m.jpg" alt="" />
+            <p>ณัฐวรรธ์ ฟิงค์เลอร์</p>
+            <p>623030XXXX</p>
+            <div class="cardgrade">
+              <ul>
+                <li><b>เกรดเฉลี่ยสะสม: 4.09</b></li>  
+              </ul>
+            </div>
+          </center>
+          <li class="item">
+            <a href="#" class="menu-btn">
+              <i class="fas fa-desktop"></i><span>ข่าวสาร</span>
+            </a>
+          </li>
+          
+          <li class="item">
+            <a href="#" class="menu-btn">
+              <i class="fas fa-desktop"></i><span>ประวัติการยื่นเอกสารคำร้อง</span>
+            </a>
+          </li>
+          
+          <li class="item">
+            <a href="#" class="menu-btn">
+              <i class="fas fa-desktop"></i><span>แก้ไขประวัติส่วนตัว</span>
+            </a>
+          </li>
+          <li class="item">
+            <a href="#" class="menu-btn">
+              <i class="fas fa-power-off"></i><span>ออกจากระบบ 
+
+              </span>
+            </a>
+          </li>
+
+        </div>
+      </div>
+      <!--จบส่วนเมนูข้าง-->
+      <!--เนื้อหาด้านใน-->
+      <div class="main-container">
+        <div class="cardbox">
+          <ul>
+            <li><b>ทุนโครงการ เซนทรัลสานฝันการศึกษา</b></li>
+          </ul>
+        </div>
+        <div class="card">
+          <img src="A1.jpg" alt="" width="200" />
+        </div>
+        <p style="text-indent:8em;"><b><font size="5">รายละเอียด : </b></font><b><font size="4.5">โครงการเซนทรัลสานฝันการศึกษา สำหรับนิสิตที่มีความตั้งใจเรียนดี ไม่เคยมีผลการเรียน W D D+ F</font></b></p>
+        <p style="text-indent:8em;"><b><font size="5", font color="red" >หมายเหตุ : </font></b><font size="3">อัพโหลดผลการเรียน 5 ภาคเป็นไฟล์ pdf ไม่เช่นนั้นไม่พิจารณา</font></p>
+        <p style="text-indent:8em;"><b><font size="3" >จำนวนเงินสนับสนุนการศึกษาต่อคน : 200 บาท ผู้ให้ทุน นายคนหล่อ ขอใจหน่อย</font></b></p>
+        <p data-toggle="collapse" data-parent="accordion" href="#">
+          <button type="button" class="btn btn-outline-danger btn-sm">ชื่อโครงงานรายละเอียด.pdf</button>
+        </p><br>
+        <div class="buttons">
+          <button class="button-th">สมัครทุน</button>
+      </div>
+      <!--จบเนื้อหาส่วนใน-->
+    </div>
+    <!--จบทั้งหมด-->
+
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $(".sidebar-btn").click(function () {
+          $(".wrapper").toggleClass("collapse");
+        });
+      });
+    </script>
+  </body>
+</html>

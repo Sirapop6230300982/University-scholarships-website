@@ -1,0 +1,447 @@
+{% extends 'Menubar-Template.html' %} 
+{% load static %}
+{% block content %}
+{% csrf_token %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+
+
+  function call21(info_id,userid,title,name,sirname)
+  {
+    Swal.fire({
+      title: title+name+' '+sirname+'\n ผ่านรอบสัมภาษณ์หรือไม่?',
+      icon:"question",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'ผ่าน',
+      denyButtonText: `ไม่ผ่าน`,
+      cancelButtonText:"ย้อนกลับ",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href="/changeStatus/"+info_id +"/"+userid+"/"+1
+      } else if (result.isDenied) {
+        window.location.href="/changeStatus/"+info_id +"/"+userid+"/"+0
+      }
+    })
+  }
+
+  function call31(info_id,userid,title,name,sirname)
+  {
+    Swal.fire({
+      "title": title+name+' '+sirname+"\nได้รับทุนเรียบร้อยแล้วหรือไม่ ? ",
+      "icon":"question",
+      "showCancelButton":true,
+      "cancelButtonText":"ย้อนกลับ",
+      "confirmButtonText":"ใช่"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href="/changeStatus/"+info_id +"/"+userid+"/"+1
+      }
+    })
+  }
+
+  function call11()
+  {
+    Swal.fire({
+    icon: 'error',
+    title: 'ไม่สามารถทำรายการได้',
+    text: 'เนื่องจากยังไม่ปิดการรับสมัครทุน',
+    })
+  }
+
+  function call12()
+  {
+    Swal.fire({
+    icon: 'error',
+    title: 'ไม่สามารถทำรายการได้',
+    text: 'เนื่องจากท่านยังไม่ได้ทำแบบฟอร์มคะแนนให้กรรมการ',
+    })
+  }
+
+  function call22(info_id,userid,title,name,sirname)
+  {
+    Swal.fire({
+      title: title+name+' '+sirname+'\n ผ่านรอบสัมภาษณ์หรือไม่?',
+      icon:"question",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'ผ่าน',
+      denyButtonText: `ไม่ผ่าน`,
+      cancelButtonText:"ย้อนกลับ",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+        icon: 'error',
+        title: 'ไม่สามารถทำรายการได้',
+        text: 'เนื่องจากมีผู้รับทุนครบเรียบร้อยแล้ว',
+        })
+      }else if (result.isDenied) {
+        window.location.href="/changeStatus/"+info_id +"/"+userid+"/"+0
+      }
+    })
+  }
+
+  function edit20(info_id,userid,title,name,sirname)
+  {
+    Swal.fire({
+      "title": "ท่านต้องการเปลี่ยนสถานะ\n"+title+name+' '+sirname+"\nให้นิสิตมีสิทธิ์เข้าร่วมสอบสัมภาษณ์ใช่หรือไม่ ? ",
+      "icon":"question",
+      "showCancelButton":true,
+      "cancelButtonText":"ไม่ใช่",
+      "confirmButtonText":"ใช่"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href="/changeStatus/"+info_id +"/"+userid+"/"+1
+      }
+    })
+  }
+
+  function edit30(info_id,userid,title,name,sirname)
+  {
+    Swal.fire({
+      "title": "ท่านต้องการเปลี่ยนสถานะ\n"+title+name+' '+sirname+"\nให้นิสิตมีสิทธิ์รับทุนใช่หรือไม่ ? ",
+      "icon":"question",
+      "showCancelButton":true,
+      "cancelButtonText":"ไม่ใช่",
+      "confirmButtonText":"ใช่"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href="/changeStatus/"+info_id +"/"+userid+"/"+1
+      }
+    })
+  }
+
+  function blockD()
+  {
+    Swal.fire({
+      "title": 'ไม่สามารถเปิดเอกสารได้',
+      "text": 'เนื่องจากยังไม่หมดเวลาส่งเอกสารของนิสิต',
+      "icon":"error",
+    })
+  }
+
+  </script>
+
+<script>
+  updateList = function () {
+      var input = document.getElementById('myPdf');
+      var output = document.getElementById('fileList2');
+
+      output.innerHTML = '<ul>';
+      for (var i = 0; i < input.files.length; ++i) {
+          output.innerHTML += '<li>' + input.files.item(i).name + '</li>';
+      }
+      output.innerHTML += '</ul>';
+  }
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="{% static 'css/ApplistAdmin.css' %}?{% now " U" %}" />
+ 
+
+{% for scholar in scholars %}
+  <div class="card">
+    <div class="poster">
+      <img src="{{scholar.si_photo_bg.url}}" alt="" />
+    </div>
+    <div class="title">
+      <h1>{{scholar.si_name}}</h1>
+    </div>
+    <div class="description">
+      <p>รายละเอียด:{{scholar.si_description|safe}}</p>
+    </div>
+  </div>
+
+  {% if check31 %}
+    <form action="/secondAppilcationAdmin/{{scholar.id}}" method="POST" enctype="multipart/form-data"  >
+      {% csrf_token %}
+
+        <div class="uploadfile">
+          <div class="uploadfilewrapper">
+            <p>อัพโหลดเอกสารสอบสัมภาษณ์</p>
+            <div class="file has-name">
+              <label class="file-label">
+                <input class="file-input" name="myPdf" id="myPdf" type="file" accept="application/pdf" onchange="javascript:updateList()">
+                  <span class="file-cta">
+                    <span class="file-icon">
+                      <i class="fas fa-upload"></i>
+                    </span>
+                    <span class="file-label">
+                      Choose a file…
+                    </span>
+                  </span>
+                  <span class="file-name">
+                    <div id="fileList2">None.pdf </div>
+                  </span>
+              </label>
+            </div>
+            <br>
+            {% if file_upload.fm_file %}
+        
+            <a href="{{file_upload.fm_file.url}}">
+            
+                <h2><span class="tag is-danger">แสดงไฟล์ปัจจุบัน</span></h3>
+      
+            </a>
+        
+          {% endif %}
+            <button type="submit" value="ตกลง" class="button is-primary"><p>ตกลง<p></button>
+          
+
+          </div>
+        </div>
+    </form>
+  {%endif%}
+
+    <div class="remainingWrapper">
+      <div class="remaining">
+        <p>คงเหลือ : {{memberG}}/{{scholar.si_max_scholar}}</p>
+      </div>
+    </div>
+
+{%endfor%}
+
+<table class="table">
+    <thead>
+      <tr>
+        <th>ชื่อ - สกุล</th>
+        {% if check %}
+          <th>คะแนน</th>  
+        {% endif %}    
+        <th>สถานะ</th>
+      </tr>
+    </thead>
+{% for listApp in listApps %}
+    <tr>
+      <td>
+        <li class="item" id="{{listApp.id}}">
+          {% if check %}
+            
+            <a href="#{{listApp.id}}" class="menu-btn" >
+              <span>{{listApp.sa_title_th}}{{listApp.sa_firstname_th}}  {{listApp.sa_lastname_th}}
+                {% if listApp.sa_status != 11 %}
+                <i class="fas fa-chevron-down drop-down"></i>
+                {% endif %}
+              </span>
+            </a>
+            {% if listApp.sa_status != 11 %}
+            <a href="/checkInfoAdmin/{{listApp.sa_si_id.id}}/{{listApp.sa_userid.id}}">
+              <i class="fas fa-id-badge"></i>
+            </a>
+            {% endif %}
+
+            {% if listApp.sa_status == 33 or listApp.sa_status == 34 or listApp.sa_status == 41 %}
+              {% if listApp.sa_statusExDate <= dateToday %}
+                <a href="/payment_admin/{{listApp.sa_si_id.id}}/{{listApp.sa_userid.id}}">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                </a>
+              {% else %}
+                <a onclick='blockD()'>
+                  <i class="fa-solid fa-file-invoice-dollar"></i>
+                </a>
+              {% endif %}
+            {% endif %}
+
+            {% if listApp.sa_status == 20 and check21 == True %}
+              <a onclick='edit20({{info_id}},{{listApp.sa_userid.id}},"{{listApp.sa_title_th}}","{{listApp.sa_firstname_th}}","{{listApp.sa_lastname_th}}")'>
+                <i class="fa-solid fa-square-pen"></i>
+              </a>
+            {% elif listApp.sa_status == 30 %}
+              <a onclick='edit30({{info_id}},{{listApp.sa_userid.id}},"{{listApp.sa_title_th}}","{{listApp.sa_firstname_th}}","{{listApp.sa_lastname_th}}")'>
+                <i class="fa-solid fa-square-pen"></i>
+              </a>
+            {% endif %}
+            
+          {% else %}
+            <a class="menu-btn">
+              <span>{{listApp.sa_title_th}}{{listApp.sa_firstname_th}}  {{listApp.sa_lastname_th}}</span>
+            </a>
+          {% endif %}
+          {%if listApp.sa_status == 21 or listApp.sa_status == 30 or listApp.sa_status == 31 or listApp.sa_status == 32 or listApp.sa_status == 33 or listApp.sa_status == 34 or listApp.sa_status == 41%}
+            <div class="sub-menu">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>ชื่อหัวข้อ</th>
+                    <th>คะแนน</th>
+                  </tr>
+                </thead>
+                {% for key,value in listApp.sa_score_info.items %}
+                  <tbody>
+                      <tr>
+                        <th>{{key}}</th>
+                        <td>{{value|floatformat:2}}</td>
+                      </tr>
+                  </tbody>
+                {% endfor %}
+              </table>
+            </div>
+          {%endif%}
+          </li>
+      </td>
+      
+      {% if check %}
+      <td>{{listApp.sa_score|floatformat:2}}</td>
+      {% endif %}
+      
+      <td> 
+
+        {%if listApp.sa_status == 11 %}
+        <div class="cardbox-pass">
+          <ul>
+          {% if scholarss == 1 and commit == True %}
+              <a href="/checkStatus/{{listApp.sa_si_id.id}}/{{listApp.sa_userid.id}}">
+                <b>ตรวจสอบเอกสาร</b>
+              </a>
+          {% elif scholarss == 1 and commit == False %}
+              <li onclick='call12()'>
+                <b>ตรวจสอบเอกสาร</b>
+              </li>
+          {% else %}
+              <li onclick='call11()'>
+                <b>ตรวจสอบเอกสาร</b>
+              </li>
+          {% endif %}
+          </ul>
+        </div>
+
+        {%elif listApp.sa_status == 20 %}
+        <div class="cardbox-notpass">
+          <ul>
+            <li>
+              <b>เอกสารไม่ผ่านเงื่อนไข</b>
+            </li>
+          </ul>
+        </div>
+
+        {%elif listApp.sa_status == 21 %}
+        <div class="cardbox-pass">
+          <ul>
+            {% if memberG == 0 %}
+              <li onclick='call22({{info_id}},{{listApp.sa_userid.id}},"{{listApp.sa_title_th}}","{{listApp.sa_firstname_th}}","{{listApp.sa_lastname_th}}")'>
+                <b>สอบสัมภาษณ์</b>
+              </li>
+            {% else %}
+              <li onclick='call21({{info_id}},{{listApp.sa_userid.id}},"{{listApp.sa_title_th}}","{{listApp.sa_firstname_th}}","{{listApp.sa_lastname_th}}")'>
+                <b>สอบสัมภาษณ์</b>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+        
+
+        {%elif listApp.sa_status == 30 %}
+        <div class="cardbox-notpass">
+          <ul>
+            <li>
+              <b>ไม่ผ่านรอบสัมภาษณ์</b>
+            </li>
+          </ul>
+        </div>
+
+        {%elif listApp.sa_status == 31 %}
+        <div class="cardbox-pass">
+          <ul>
+              <li>
+                <b>รอนิสิตยืนยันการรับทุน</b>
+              </li>
+          </ul>
+        </div>
+
+        {%elif listApp.sa_status == 32 %}
+        <div class="cardbox-notpass">
+          <ul>
+            <li>
+              <b>นิสิตขอสละสิทธิ์</b>
+            </li>
+          </ul>
+        </div>
+
+        {%elif listApp.sa_status == 33 %}
+        <div class="cardbox-pass">
+          <ul>
+              <li onclick='call31({{info_id}},{{listApp.sa_userid.id}},"{{listApp.sa_title_th}}","{{listApp.sa_firstname_th}}","{{listApp.sa_lastname_th}}")'>
+                <b>นิสิตยืนยันดำเนินการรับทุน</b>
+              </li>
+          </ul>
+        </div>
+
+        {%elif listApp.sa_status == 34 %}
+        <div class="cardbox-pass">
+          <ul>
+              <li>
+                <b>นิสิตกำลังแก้ไขเอกสารทางการเงิน</b>
+              </li>
+          </ul>
+        </div>
+
+        {%elif listApp.sa_status == 41 %}
+        <div class="cardbox-pass">
+          <ul>
+              <li>
+                <b>รับทุนเรียบร้อย</b>
+              </li>
+          </ul>
+        </div>
+        {% endif %}
+      </td>
+    </tr>
+  {%endfor%}
+  </table>
+  <div class ="list">
+  <a href="/pdf_genScholar/{{info_id}}"><button class="button is-warning is-fullwidth"><p><i class="fa-solid fa-file-signature"></i>ดาวน์โหลดรายชื่อนิสิตทั้งหมด</p></button></a>
+  </div>
+<!-- /////////////////////////////////////////////////////////////// -->
+
+      <!--page-->
+
+<div class="level-item has-text-centered">
+  <nav class="pagination" role="navigation" aria-label="pagination">
+    <ul class="pagination-list">
+      {%if listApps.paginator.num_pages > 1 %}
+      {% for pagenumber in listApps.paginator.page_range %}
+      <li>
+        <a class="pagination-link 
+        
+        
+        {% if listApps.number == pagenumber %}
+        is-current 
+  
+        {% endif %}
+  
+  
+        " aria-label="Goto page 1" href="?page={{pagenumber}}">{{pagenumber}}</a>
+      </li>
+      {% endfor %}
+      {%endif%}
+   
+    </ul>
+  </nav>
+  </div>
+  <!-- end page -->
+
+  
+  <!--<script type="text/javascript">
+    $(document).ready(function () {
+      $(".sidebar-btn").click(function () {
+        $(".wrapper").toggleClass("collapse");
+      });
+    });
+  </script>-->
+  {%if messages %}
+{%for m in messages %}
+<script>
+  Swal.fire({
+    "title": "ผิดพลาด!",
+    "text": "{{m}}",
+    "icon": "error"
+  })
+</script>
+{% endfor %}
+{% endif %}
+
+{% endblock %}

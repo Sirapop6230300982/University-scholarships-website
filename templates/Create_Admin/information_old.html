@@ -1,0 +1,121 @@
+{% extends 'Menubar-Template.html' %}
+{% load static %}
+{% block content %}
+
+<script>
+  updateList = function () {
+    var input = document.getElementById('images_news');
+    var output = document.getElementById('fileList');
+
+    output.innerHTML = '<ul>';
+    for (var i = 0; i < input.files.length; ++i) {
+      output.innerHTML += '<li>' + input.files.item(i).name + '</li>';
+    }
+    output.innerHTML += '</ul>';
+  }
+</script>
+<script>
+  updateList2 = function () {
+    var input = document.getElementById('file_news');
+    var output = document.getElementById('fileList2');
+
+    output.innerHTML = '<ul>';
+    for (var i = 0; i < input.files.length; ++i) {
+      output.innerHTML += '<li>' + input.files.item(i).name + '</li>';
+    }
+    output.innerHTML += '</ul>';
+  }
+</script>
+{%if messages %}
+{%for m in messages %}
+<script>
+  Swal.fire({
+    "title": "สำเร็จ",
+    "text": "{{m}}",
+    "icon": "success"
+  })
+</script>
+{% endfor %}
+{% endif %}
+
+
+
+<div class="center">
+
+  <h2>สร้างประชาสัมพันธ์</h2>
+
+
+
+
+  <form action="information" method="POST" enctype="multipart/form-data">
+
+
+    {% csrf_token %}
+
+
+    <input type="text" class="field" placeholder="หัวข้อประชาสัมพันธ์" name="head_news">
+
+    <textarea placeholder="เนื้อหาของข่าวประชาสัมพันธ์" class="field" name="detail_news"></textarea>
+
+    <label>วันหมดอายุของการประกาศ</label>
+    <input type="date" class="field" name="date_news">
+
+    <div class="file has-name is-fullwidth">
+      <div class="field">
+        <label class="label level-left">กรุณาอัพโหลดรูปภาพทุน </label>
+        <label class="file-label">
+          <input class="file-input" name="images_news" id="images_news" type="file"
+            accept="image/jpeg,image/gif,image/png" onchange="javascript:updateList()">
+          <span class="file-cta">
+            <span class="file-icon">
+              <i class="fas fa-upload"></i>
+            </span>
+            <span class="file-label">
+
+              Choose a file…
+            </span>
+          </span>
+          <span class="file-name">
+            <div id="fileList"> อัพโหลดไฟล์ภาพ </div>
+          </span>
+        </label>
+      </div>
+    </div>
+
+
+    <div class="file has-name is-fullwidth">
+      <div class="field">
+        <label class="label level-left">กรุณาอัพโหลดไฟล์ </label>
+        <label class="file-label">
+
+          <input class="file-input" name="file_news" id="file_news" type="file" accept="application/pdf"
+            onchange="javascript:updateList2()">
+
+          <span class="file-cta">
+            <span class="file-icon">
+              <i class="fas fa-upload"></i>
+            </span>
+            <span class="file-label">
+
+              Choose a file…
+            </span>
+          </span>
+          <span class="file-name">
+            <div id="fileList2">อัพโหลดไฟล์ *.pdf </div>
+          </span>
+        </label>
+      </div>
+    </div>
+
+
+
+    <input type="submit" value="ยืนยัน" class="btn btn-primary">
+
+
+
+</div>
+
+
+
+</form>
+{% endblock %}

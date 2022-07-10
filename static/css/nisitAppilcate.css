@@ -1,0 +1,351 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background: #fff;
+  }
+  
+  .wrapper .header {
+    z-index: 1;
+    background: #6b0d1d;
+    position: fixed;
+    width: calc(100% - 0%);
+    height: 50px;
+    display: flex;
+    top: 0;
+  }
+  
+  .wrapper .header .header-menu {
+    width: calc(100% - 0%);
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+  }
+  
+  .wrapper .header li {
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+  }
+  
+  .wrapper .header .header-menu .title {
+    color: #fff;
+    font-size: 25px;
+    text-transform: uppercase;
+    font-weight: 900;
+  }
+  
+  .wrapper .header .header-menu .title img {
+    width: 5%;
+  }
+  
+  .wrapper .header .header-menu .title span {
+    color: #37ab00;
+    padding: 20px;
+  }
+  
+  .wrapper .header .header-menu .sidebar-btn {
+    color: #fff;
+    position: absolute;
+    margin-left: 240px;
+    font-size: 22px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: 0.3s;
+    transition-property: color;
+  }
+  
+  .wrapper .header .header-menu .sidebar-btn:hover {
+    color: #cd0000;
+  }
+  
+  .wrapper .header .header-menu ul {
+    display: flex;
+  }
+  
+  .wrapper .header .header-menu ul li a {
+    background: #fff;
+    color: #000;
+    display: block;
+    margin: 0 10px;
+    font-size: 18px;
+    width: 34px;
+    height: 34px;
+    line-height: 35px;
+    text-align: center;
+    border-radius: 50%;
+    transition: 0.3s;
+    transition-property: background, color;
+  }
+  
+  .wrapper .header .header-menu ul li a:hover {
+    background: #cd0000;
+    color: #fff;
+  }
+  
+  .wrapper .sidebar {
+    z-index: 1;
+    background: #852b3a;
+    position: fixed;
+    top: 50px;
+    width: 250px;
+    height: 100%;
+    transition: 0.3s;
+    transition-property: width;
+    overflow-y: auto;
+  }
+  
+  .wrapper .sidebar .sidebar-menu {
+    overflow: hidden;
+    padding-bottom: 75px;
+    cursor: pointer;
+  }
+  .cardgrade {
+    width:180px;
+    height: 23px;
+    border-radius: 12px;
+    background-color:rgb(212, 223, 68);
+    padding: 1px;
+    margin-bottom: 0px;
+    color: rgb(14, 13, 13);
+    display: block;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: auto;
+    margin-left: auto;
+    overflow: hidden;
+  }
+  .cardgrade ul li {
+    list-style: none;
+    margin: 0 5px;
+    text-decoration: none;
+    color: rgb(8, 8, 8);
+    padding: 1px 1px;
+    overflow: hidden;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .profile img {
+    margin: 20px 0;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .profile p {
+    color: #bbb;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .profile h2 {
+    color: yellow;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item {
+    width: 250px;
+    overflow: hidden;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item .menu-btn {
+    display: block;
+    color: #fff;
+    position: relative;
+    padding: 20px 20px;
+    transition: 0.3s;
+    transition-property: color;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item .menu-btn:hover {
+    background-color: #cd0000;
+    transition: 0.3s;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item .menu-btn i {
+    margin-right: 20px;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item .menu-btn .drop-down {
+    float: right;
+    font-size: 12px;
+    margin-top: 3px;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item .sub-menu {
+    background: #5c1818b6;
+    overflow: hidden;
+    max-height: 0;
+    transition: 0.3s;
+    transition-property: background, max-height;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item .sub-menu a {
+    display: block;
+    position: relative;
+    color: #fff;
+    white-space: nowrap;
+    font-size: 15px;
+    padding: 15px;
+    transition: 0.3s;
+    transition-property: background;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item .sub-menu a:hover {
+    background: #cd0000;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item .sub-menu a:not(last-child) {
+    border-bottom: 5px solid #000000cb;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item .sub-menu i {
+    padding-right: 20px;
+    font-size: 10px;
+  }
+  
+  .wrapper .sidebar .sidebar-menu .item:target .sub-menu {
+    max-height: 500px;
+  }
+  
+  .wrapper .main-container {
+    width: (100% - 250px);
+    margin-top: 50px;
+    margin-left: 250px;
+    padding: 10px;
+    background: rgb(235, 233, 233);
+    background-size: cover;
+    height: 100vh;
+    transition: 0.3s;
+  }
+  
+  .wrapper .main-container img {
+    width: 100%;
+    height: 100%;
+   
+  }
+  
+  .wrapper.collapse .sidebar {
+    width: 70px;
+  }
+  
+  .wrapper.collapse .sidebar .profile img,
+  .wrapper.collapse .sidebar .profile p,
+  .wrapper.collapse .sidebar .profile h2,
+  .wrapper.collapse .sidebar .cardgrade,
+  .wrapper.collapse .sidebar span,
+  .wrapper.collapse .sidebar a span {
+    display: none;
+  }
+  
+  .wrapper.collapse .sidebar .sidebar-menu .item .menu-btn {
+    font-size: 23px;
+  }
+  
+  .wrapper.collapse .sidebar .sidebar-menu .item .menu-btn {
+    font-size: 23px;
+  }
+  
+  .wrapper.collapse .sidebar .sidebar-menu .item .sub-menu i {
+    font-size: 18px;
+    padding-left: 3px;
+  }
+  
+  .wrapper.collapse .main-container {
+    width: calc(100% - 70px);
+    margin-left: 70px;
+  }
+  
+  .wrapper .main-container .card {
+    padding: 15px;
+    margin-bottom: 0px;
+    font-size: 14px;
+    width: 80%;
+    height: 480px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .cardbox {
+    width:78%;
+    height: 45px;
+    background-color:rgb(196, 189, 189);
+    padding: 10px;
+    margin-bottom: 0px;
+    font-size: 20px;
+    color: white;
+    display: block;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  
+  .cardbox ul li {
+    list-style: none;
+    margin: 0 5px;
+    text-decoration: none;
+    color: rgb(8, 8, 8);
+    padding: 1px 20px;
+  }
+  
+  .button-th{
+    font-size:15px;
+    color:rgb(255, 250, 250);
+    background-color: rgb(224, 26, 76);
+    width:80%;
+    height:25px;
+    border-radius: 5px;
+    padding:1px;
+    text-align: center;
+    justify-content: space-between;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  
+  .btn {
+    margin-left: 128px;
+    margin-top: auto;
+    top:0;
+    display: flex;
+    cursor: pointer;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  }
+  
+  .btn-outline-danger {
+    color: #c5182a;
+    background-color: transparent;
+    background-image: none;
+    border-color: #c5182a;
+  }
+  
+  .btn-outline-danger:hover {
+    color: #fff;
+    background-color: #c5182a;
+    border-color: #c5182a;
+  }
+  
+  .btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+  }
+
+a {
+    text-decoration: none !important;
+}

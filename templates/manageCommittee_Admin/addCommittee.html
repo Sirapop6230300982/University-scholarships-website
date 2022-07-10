@@ -1,0 +1,16 @@
+<!--เพิ่มรายชื่อคณะกรรมการ-->
+{% extends 'Menubar-Template.html' %}
+{% load static %}
+{% block content %}
+
+<p>เพิ่มรายชื่อกรรมการ</p>
+<form action ="addCommittee" method="POST">
+{% csrf_token %}
+<input type="text" class="field" placeholder="ชื่อ" name="firstName" id = "firstName" required>
+<input type="text" class="field" placeholder="นามสกุล" name="lastName" id = "lastName" required>
+<input type="email" class="field" placeholder="email" name="email" id = "email" required>
+<input type="submit" value="ยืนยัน" class="btn btn-primary">
+
+</form>
+
+{% endblock %}

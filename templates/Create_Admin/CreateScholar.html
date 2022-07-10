@@ -1,0 +1,359 @@
+
+{% extends 'Menubar-Template.html' %} 
+{% load static %}
+{% block content %}
+<script src='https://cdn.tiny.cloud/1/h3zt1lw1emdet6rxm1vos4jkjli5161zjiq3rn6q0qemmc98/tinymce/5/tinymce.min.js' referrerpolicy="origin"></script> 
+<script src="{% static 'js/load.js' %}"></script>  
+
+</script>
+
+
+<script>
+  tinymce.init({
+    selector: '#mytextarea',
+    plugins: ['table','print'],
+    table_use_colgroups: true
+  });
+</script>
+</head>
+
+
+<script type="text/JavaScript">
+    // เก๊าแก้ไขหน้านี้ ถ้าอยากได้รูปแบบเดิม โค้ดอยู่ที่ ...ลืมสร้าง 555
+function summation()
+{
+    var input1 = document.getElementById('input1').value;
+    var input2 = document.getElementById('input2').value;
+    var fname = document.getElementById("total").value;
+    var total = input1 / input2;
+    document.getElementById('total').value = Math.ceil(total);
+}
+
+$(document).ready(function(){
+    //group add limit
+    var maxGroup = 10;
+    
+    //add more fields group
+    $(".addMore").click(function(){
+      if($('body').find('.fieldGroup').length < maxGroup){
+        var fieldHTML = '<div class="field is-horizontal fieldGroup">'+$(".fieldGroupCopy").html()+'</div>';
+        $('body').find('.fieldGroup:last').after(fieldHTML);
+      }else{
+        alert('Maximum '+maxGroup+' groups are allowed.');
+      }
+    });
+    
+    //remove fields group
+    $("body").on("click",".remove",function(){
+        if($('body').find('.fieldGroup').length > 1){
+            $(this).parents(".fieldGroup").remove();
+        }
+        else{
+            alert('You must have one or more awardors. (current awardors : ' + $('body').find('.fieldGroup').length + ')');
+        }
+    });
+  });
+
+</script>
+
+<script>
+    function validateSize(input) {
+  const fileSize = input.files[0].size / 1024 / 1024; // in MiB
+  if (fileSize > 2) {
+    alert('File size exceeds 2 MiB');
+    // $(file).val(''); //for clearing with Jquery
+  } else {
+    // Proceed further
+  }
+}
+</script>
+
+
+
+<script>
+    updateList = function () {
+        var input = document.getElementById('img');
+        var output = document.getElementById('fileList');
+
+        output.innerHTML = '<ul>';
+        for (var i = 0; i < input.files.length; ++i) {
+            output.innerHTML += '<li>' + input.files.item(i).name + '</li>';
+        }
+        output.innerHTML += '</ul>';
+    }
+</script>
+
+<script>
+    updateList2 = function () {
+        var input = document.getElementById('file_t');
+        var output = document.getElementById('fileList2');
+
+        output.innerHTML = '<ul>';
+        for (var i = 0; i < input.files.length; ++i) {
+            output.innerHTML += '<li>' + input.files.item(i).name + '</li>';
+        }
+        output.innerHTML += '</ul>';
+    }
+</script>
+    
+<div class="center">
+    <h2>สร้างประกาศรับทุน</h2>
+</div>
+
+<form action ="CreateScholar" id="myFormId" method="POST" enctype="multipart/form-data" >
+    {% csrf_token %}
+
+    <!--ชื่อทุน-->
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">ชื่อทุน</label>
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <p class="control">
+                    <input type="text" class="field" placeholder="ชื่อทุน" name="name_scholar" required>      
+                </p>
+            </div>
+        </div>
+    </div>
+    <!--รายละเอียดทุน-->
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">รายละเอียดทุน</label>
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <p class="control">
+                    <!--<textarea placeholder="เนื้อหา" class="field" name ="detail"></textarea> -->
+                    
+                    <textarea id="mytextarea" name="mytextarea">
+                        กรุณากรอกเนื้อหา
+                      </textarea>
+
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!--จำนวนเงิน(รวม)-->
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">จำนวนเงิน(รวม)</label>
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <p class="control">
+                    <input class="field" type="number" step="any" placeholder="จำนวนเงิน(รวม)" id = "input1" onchange="summation()" name="amount"> 
+                </p>
+            </div>
+        </div>
+    </div>
+    <!--จำนวนเงิน/คน-->
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">จำนวนเงินต่อคน(บาท)</label>
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <p class="control">
+                    <input class="field" type="number" step="any" placeholder="จำนวนเงิน/คน"id = "input2" onchange="summation()" name ="amount_per_person" >
+                </p>
+            </div>
+        </div>
+    </div>
+    <!--จำนวนคนที่จะได้รับ (AUTO)-->
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">จำนวนคนที่จะได้รับ (คน)</label>
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <p class="control">
+                    <input class="field" type="number"  name ="total_all"  value ="0" placeholder="จำนวนคนที่จะได้รับ (AUTO)" readonly id="total" >
+                </p>
+            </div>
+        </div>
+    </div>
+    <!--วันหมดอายุของทุน-->
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">วันหมดอายุของทุน</label>
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <p class="control">
+                    <input type="date" class="field" name="date_news" required>
+                </p>
+            </div>
+        </div>
+    </div>
+    <!--หมายเหตุ-->
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">หมายเหตุ</label>
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <p class="control">
+                    <input class="field" type="text" placeholder="หมายเหตุ" name="option">
+                </p>
+            </div>
+        </div>
+    </div>
+    <!--ปีการศึกษา-->
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">ปีการศึกษา</label>
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <p class="control">
+                    <input class="field" type="text" placeholder="ปีการศึกษา" name="year" required>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!--รายชื่อผู้มอบทุน awardors แปลว่าผู้มอบทุน-->
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">รายชื่อผู้มอบทุน</label>
+        </div>
+        <div class="field-body">    
+            <div class="field">
+                <div class="control">
+                    <div class="field is-horizontal fieldGroup">
+                        <div class="field-label is-normal">
+                            <label class="label">ชื่อผู้มอบทุน</label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field">
+                                <p class="control">
+                                    <input type="text" class="field" name="text[]" placeholder="ชื่อผู้มอบทุน" />
+                                </p>
+                            </div>
+                            <div class="field">
+                                <a href="javascript:void(0)" class="button is-danger remove"><i class="fas fa-times"></i></a>
+                            </div>                        
+                        </div>
+                        
+                    </div>
+                </div>
+                <a href="javascript:void(0)" class="button is-info is-rounded addMore"><i class="fas fa-plus">เพิ่มรายชื่อผู้มอบทุน</i></a>
+            </div>
+        </div>
+    </div>
+    <!--copy of awardors-->
+        <div class="field is-horizontal fieldGroupCopy" style="display: none;">
+            <div class="field-label is-normal">
+                <label class="label">ชื่อผู้มอบทุน</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <p class="control">
+                        <input type="text" class="field" name="text[]" placeholder="ชื่อผู้มอบทุน"/>
+                    </p>
+                </div>
+                <div class="field">
+                    <a href="javascript:void(0)" class="button is-danger remove"><i class="fas fa-times"></i></a>
+                </div>
+            </div>
+        </div>
+    <!--ประเภททุนการศึกษา-->
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">ประเภททุนการศึกษา</label>
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <p class="control">
+                    <div class="select is-fullwidth">
+                        <select name="type_scholar">
+                            <option value="ทุนภายนอก">ทุนภายนอก</option>
+                            <option value="ทุนภายใน">ทุนภายใน</option>
+                            <option value="ทุนผสม">ทุนผสม</option>
+                        </select>
+                    </div>
+                </p>
+            </div>
+        </div>
+    </div>
+    <!--รูปภาพประชาสัมพันธ์ทุน-->
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">รูปภาพประชาสัมพันธ์ทุน</label>
+        </div>
+        <div class="field-body file has-name is-fullwidth">
+            <div class="field">
+                <label class="file-label">
+                    <input class="file-input" type="file" name="img" id="img" accept="image/jpeg,image/gif,image/png" onchange="javascript:updateList()"  required>
+                    <span class="file-cta">
+                        <span class="file-icon">
+                            <i class="fas fa-upload"></i>
+                        </span>
+                        <span class="file-label">
+                            เลือกไฟล์
+                        </span>
+                    </span>
+                    <span class="file-name">
+                        <div id="fileList"> ยังไม่ได้อัพโหลดไฟล์ </div>
+                    </span>
+                </label>
+            </div>
+        </div>
+    </div>
+    <!--ไฟล์รายละเอียดทุน-->
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">ไฟล์รายละเอียดทุน</label>
+        </div>
+        <div class="field-body file has-name is-fullwidth">
+            <div class="field">
+                <label class="file-label">
+                    <input class="file-input" type="file" name="file_t" id="file_t" accept="application/pdf" onchange="javascript:updateList2()">
+                    <span class="file-cta">
+                        <span class="file-icon">
+                            <i class="fas fa-upload"></i>
+                        </span>
+                        <span class="file-label">
+                            เลือกไฟล์
+                        </span>
+                    </span>
+                    <span class="file-name">
+                        <div id="fileList2"> ยังไม่ได้อัพโหลดไฟล์ </div>
+                    </span>
+                </label>
+            </div>
+        </div>
+    </div>
+    <!--ต้องการประชาสัมพันธ์ในข่าวประชาสัมพันธ์หรือไม่ ?-->
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">ต้องการประชาสัมพันธ์ในข่าวประชาสัมพันธ์หรือไม่ ?</label>
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <p class="control">
+                    <label class="checkbox">
+                        <input type="checkbox" name ="news" value="1">  
+                        เพิ่มลงในข่าวประชาสัมพันธ์
+                    </label>
+                </p>
+            </div>
+        </div>
+    </div>
+    <br>
+    <button type="submit" id ="myButtonID" class="button is-success is-fullwidth">Send</button>
+</form>
+
+<script type="text/javascript">
+   
+    $('#myFormId').submit(function(){
+        $("#myButtonID", this)
+          .html("Please Wait...")
+          .attr('disabled', 'disabled');
+        return true;
+    });
+       
+    </script>
+{% endblock %}

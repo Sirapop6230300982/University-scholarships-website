@@ -1,0 +1,44 @@
+{% load socialaccount %}
+
+
+<html>
+  <head>
+    <title>หน้าแรก</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css"
+    />
+  </head>
+  <body>
+    {% if user.is_authenticated %}
+        <h1>Welcome, {{ user.username }} !</h1>  
+        <h1>สวัสดี คุณ {{ user.socialaccount_set.all.0.extra_data.name }}</h1>
+        <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" />
+        <h3> บัญชีที่ใช้ {{ user.socialaccount_set.all.0.extra_data.email }}</h3>
+        
+        <p><a href="{% url 'logout' %}">Log Out</a></p>
+        <p>this is my_file</p>
+        {%for file in files%}
+          <a href='{{file.file.url}}'>{{file.file}}</a>
+        {%endfor%}
+        <h2>อีก 5 วินาที จะพาคุณเข้าสู่ระบบ</h2>
+        {%block js%}
+        <script type="text/javascript">
+          setTimeout(function() {window.location.replace("http://warinnarat.thddns.net:9920/home", "_blank")}, 2000);
+          </script>
+        {%endblock%}
+        
+    {% else %}
+        
+
+
+        <div class="container">
+          <button onclick="document.location='{% provider_login_url 'google' %}'" class="button is-link">
+            <i class="fab fa-google">   </i>
+              Login with Google
+          </button>
+        </div>
+        {% endif %}
+  </body>
+</html>

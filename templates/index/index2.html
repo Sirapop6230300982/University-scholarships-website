@@ -1,0 +1,138 @@
+
+{% load static %}
+{% load socialaccount %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Index</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css"
+    />
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+      charset="utf-8"
+    ></script>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}?{% now "U" %}" />
+    <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma/bulma.css" rel="stylesheet">
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body>
+    <!--เริ่มการคลุม-->
+    <div class="wrapper">
+      <!--เริ่มส่วนของ Header-->
+      <div class="header">
+        <div class="header-menu">
+          <div class="title"></i><span style=></span></div>
+         
+        </div>
+      </div>
+
+      <!--จบส่วนของ Header-->
+
+      <!--เมนูด้านข้างเริ่มที่นี่-->
+      <div class="sidebar">
+       <div class="loginWrapper">
+         <h1>Login</h1>
+         <div class="imgHolder">
+         <img src="{% static 'images/5dd3f3ded32deeb1.gif' %}">
+         </div>
+         
+         
+
+         {% if user.is_authenticated %}
+         <a href="/limitaccount">
+         <div class="anotherLogin">
+
+          <div class="imgHolderInside">
+            <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}">
+          </div>
+
+
+          <div class="textLogin">
+              <h2>เข้าสู่ระบบ </h2>
+           </div>
+
+        </div>
+
+        </a>
+         
+         {%else%}
+         <a href="{% provider_login_url 'google' %}"> <button>
+
+            <h2>เข้าสู่ระบบด้วยรหัส Nontri</h2>
+          </button></a>
+         {%endif%}
+
+      
+       </div>
+      </div>
+      <!--จบส่วนเมนูข้าง-->
+      <!--เนื้อหาด้านใน-->
+      <div class="main-container">
+
+        {% for new in news%}
+        {% if new.sn_status == 0%}
+        <div class="card">
+          <h1>{{new.sn_header}}</h1>
+          {% if new.sn_photo_bg %}
+              <img src="{{new.sn_photo_bg.url}}">
+          {% endif %}
+        
+          <div class="description"> 
+            <p> {{new.sn_description | safe}} </p>
+          </div>
+          <div class="level-item has-text-centered"><span class="tag is-primary is-large">{{new.sn_expire_date}}</span>
+          <br>
+          </div>
+
+          {% if new.sn_path_to_pdf %} 
+          <a href="/viewpost/{{new.id}}"><button class="button is-link is-fullwidth"><p>รายละเอียดเพิ่มเติม</p></button> </a>
+          {%endif%}
+        
+        </div>
+
+     
+    
+      {%endif%}
+
+
+      {%endfor%}
+      </div>
+      <!--จบเนื้อหาส่วนใน-->
+      
+
+
+
+
+
+
+    </div>
+    <!--จบทั้งหมด-->
+
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $(".sidebar-btn").click(function () {
+          $(".wrapper").toggleClass("collapse");
+        });
+      });
+    </script>
+  </body>
+  {%if messages %}
+         {%for m in messages %}
+         <script>
+           Swal.fire({
+             "title": "แจ้งเตือน!",
+             "text": "{{m}}",
+           })
+         </script>
+         {% endfor %}
+         {% endif %}
+
+
+         
+</html>

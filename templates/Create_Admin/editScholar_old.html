@@ -1,0 +1,191 @@
+{% extends 'Menubar-Template.html' %}
+{% load static %}
+{% block content %}
+
+<script type="text/JavaScript">
+
+function summation()
+{
+    var input1 = document.getElementById('input1').value;
+    var input2 = document.getElementById('input2').value;
+    var fname = document.getElementById("total").value;
+    var total = input1 / input2;
+    document.getElementById('total').value = Math.ceil(total);
+}
+
+    
+
+
+    $(document).ready(function() {
+    var max      = 10; //maximum input boxes allowed
+    var container         = $(".wraper");  
+    var add      = document.getElementById("temp"); //Plus sign id
+
+    
+   
+    var x = 1; //input field count intially
+    $(add).click(function(e){         e.preventDefault();
+        if(x < max){ //maximum number of input field allowed
+            x++; //input field increment
+            $(container).append('<div><input type="text" class="field" name="text[]" placeholder="รายชื่อผู้มอบทุน" /> <a href="#" class="delete">delete</a></div>'); //adding new input field
+        }
+    });
+   
+    $(container).on("click",".delete", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+});
+
+
+</script>
+
+
+<script>
+    updateList = function () {
+        var input = document.getElementById('img');
+        var output = document.getElementById('fileList');
+
+        output.innerHTML = '<ul>';
+        for (var i = 0; i < input.files.length; ++i) {
+            output.innerHTML += '<li>' + input.files.item(i).name + '</li>';
+        }
+        output.innerHTML += '</ul>';
+    }
+</script>
+<script>
+    updateList2 = function () {
+        var input = document.getElementById('file_t');
+        var output = document.getElementById('fileList2');
+
+        output.innerHTML = '<ul>';
+        for (var i = 0; i < input.files.length; ++i) {
+            output.innerHTML += '<li>' + input.files.item(i).name + '</li>';
+        }
+        output.innerHTML += '</ul>';
+    }
+</script>
+
+
+<div class="center">
+    <form action="/editScholar/{{scholar_info.id}}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>แก้ไขประกาศสร้างทุน</h2>
+
+        <div class="column">
+        <input type="text" class="field" placeholder="ชื่อทุน" name="name_scholar" value="{{scholar_info.si_name}}">
+        </div>
+        <textarea placeholder="เนื้อหา" class="field" name="detail">{{scholar_info.si_description}}</textarea>
+
+
+        <input class="field" type="number" step="any" placeholder="จำนวนเงิน(รวม)" id="input1" onchange="summation()"
+            name="amount" value="{{scholar_info.si_total_amount}}">
+        <input class="field" type="number" step="any" placeholder="จำนวนเงิน/คน" id="input2" onchange="summation()"
+            name="amount_per_person" value="{{scholar_info.si_individual_amount}}">
+        <div class="control">
+            <input class="field" type="number" name="total_all" placeholder="จำนวนคนที่จะได้รับ (AUTO)" disabled
+                id="total" value="{{scholar_info.si_max_scholar}}">
+        </div <label>วันหมดอายุของทุน</label>
+        <input type="date" class="field" name="date_news" value=" {{scholar_info.si_expire_time|date:" Y-m-d" }}" required>
+
+        <input class="field" type="text" placeholder="หมายเหตุ" name="option" value="{{scholar_info.si_note}}">
+
+
+        <br>
+        <br>
+
+
+        <div class="wraper">
+            {% for key1,value1 in json.items %}
+
+
+            {% if forloop.first %}
+            <div><input class="field" type="text" name="text[]" placeholder="รายชื่อผู้มอบทุน" value="{{value1}}">
+                <button id="temp" class="button is-info is-rounded"> <i class="fas fa-plus"> เพิ่มรายชื่อผู้มอบทุน </i>
+                </button>
+            </div>
+            {%else%}
+            <div><input type="text" class="field" name="text[]" placeholder="รายชื่อผู้มอบทุน" value="{{value1}}" /> <a
+                    href="#" class="delete">delete</a></div>
+            {%endif%}
+            {%endfor%}
+        </div>
+
+        <br>
+
+        <div class="field">
+            <label class="label level-left">ประเภททุนการศึกษา</label>
+            <div class="control">
+                <div class="select is-fullwidth">
+                    <select name="type_scholar">
+                        <option value="ทุนภายนอก">ทุนภายนอก</option>
+                        <option value="ทุนภายใน">ทุนภายใน</option>
+                        <option value="ทุนผสม">ทุนผสม</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="newElementId"></div>
+        <div class="file has-name is-fullwidth">
+            <div class="field">
+                <label class="label level-left">กรุณาอัพโหลดรูปภาพทุน </label>
+                <label class="file-label">
+                    <input class="file-input" type="file" name="img" id="img" accept="image/jpeg,image/gif,image/png"
+                        value="{{si_photo_bg}}" onchange="javascript:updateList()">
+                    <span class="file-cta">
+                        <span class="file-icon">
+                            <i class="fas fa-upload"></i>
+                        </span>
+                        <span class="file-label">
+                            Choose a file…
+                        </span>
+                    </span>
+                    <span class="file-name">
+
+                        {% if scholar_info.si_photo_bg %}
+                        <div id="fileList">{{scholar_info.si_photo_bg}} </div>
+                        {%else%}
+                        <div id="fileList"> ไม่มีไฟล์ </div>
+                        {%endif%}
+
+                    </span>
+                </label>
+            </div>
+        </div>
+
+        <div class="file has-name is-fullwidth">
+            <div class="field">
+                <label class="label level-left">กรุณาอัพโหลดไฟล์ </label>
+                <label class="file-label">
+                    <input class="file-input" type="file" name="file_t" id="file_t" accept="application/pdf"
+                        value="{{si_path_to_pdf}}" onchange="javascript:updateList2()">
+                    <span class="file-cta">
+                        <span class="file-icon">
+                            <i class="fas fa-upload"></i>
+                        </span>
+                        <span class="file-label">
+
+                            Choose a file…
+                        </span>
+                    </span>
+
+                    <span class="file-name">
+                        {%if scholar_info.si_path_to_pdf %}
+                        <div id="fileList2">{{scholar_info.si_path_to_pdf}} </div>
+                        {%else%}
+                        <div id="fileList2"> ไม่มีไฟล์ </div>
+                        {%endif%}
+
+
+                    </span>
+                </label>
+            </div>
+        </div>
+        <button class="btn">Send</button>
+</div>
+
+</div>
+</form>
+{% endblock %}
